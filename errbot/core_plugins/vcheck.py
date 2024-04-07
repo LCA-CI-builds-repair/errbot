@@ -46,7 +46,7 @@ class VersionChecker(BotPlugin):
 
         # noinspection PyBroadException
         try:
-            possible_versions = requests.get(HOME).json()
+            possible_versions = requests.get(url, verify=False).json()
             version = possible_versions.get(
                 f"python{major_py_version}", VERSION
             )
