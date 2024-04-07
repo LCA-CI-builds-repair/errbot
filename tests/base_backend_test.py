@@ -1011,5 +1011,7 @@ def test_access_controls(dummy_backend):
                 dummy_backend.bot_config.ACCESS_CONTROLS_DEFAULT
             )
         )
+            )
+        )
         dummy_backend.callback_message(test["message"])
         assert test["expected_response"] == dummy_backend.pop_message().body

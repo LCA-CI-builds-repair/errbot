@@ -115,10 +115,11 @@ def test_plugin_cycle(testbot):
         testbot.assertInCommand(
             f"!repos install {plugin}",
             f"Installing {plugin}..."
-        ),
+        )
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
+        )
         )
         assert "Plugins reloaded" in testbot.pop_message()
 
