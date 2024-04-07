@@ -10,7 +10,6 @@ class RoomTest(BotPlugin):
     def activate(self):
         super().activate()
         self.purge()
-
     def callback_room_joined(self, room, user, invited_by):
         log.info("join")
         self.events.put("callback_room_joined {!s}".format(room))
