@@ -53,6 +53,11 @@ class VersionChecker(BotPlugin):
             self.log.debug("Latest Errbot version is: %s", version)
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
             self.log.info("Could not establish connection to retrieve latest version.")
+
+        if version is not None:
+            self.log.info("Latest Errbot version is: %s", version)
+        else:
+            self.log.info("Latest Errbot version could not be retrieved.")
         return version
 
     def _async_vcheck(self):
