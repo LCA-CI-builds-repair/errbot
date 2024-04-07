@@ -1000,6 +1000,7 @@ def test_access_controls(dummy_backend):
 
     for test in tests:
         dummy_backend.bot_config.ACCESS_CONTROLS_DEFAULT = test.get("acl_default", {})
+        # Add the bot admins to the access controls
         dummy_backend.bot_config.ACCESS_CONTROLS = test.get("acl", {})
         dummy_backend.bot_config.BOT_ADMINS = test.get("bot_admins", ())
         logger = logging.getLogger(__name__)
@@ -1009,6 +1010,8 @@ def test_access_controls(dummy_backend):
         logger.info(
             "** acl_default: {!r}".format(
                 dummy_backend.bot_config.ACCESS_CONTROLS_DEFAULT
+            )
+        )
             )
         )
         dummy_backend.callback_message(test["message"])
