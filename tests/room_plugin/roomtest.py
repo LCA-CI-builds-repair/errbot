@@ -10,17 +10,18 @@ class RoomTest(BotPlugin):
     def activate(self):
         super().activate()
         self.purge()
-
+```python
     def callback_room_joined(self, room, user, invited_by):
-        log.info("join")
-        self.events.put("callback_room_joined {!s}".format(room))
+        log.info('join')
+        self.events.put('callback_room_joined {!s}'.format(room))
 
     def callback_room_left(self, room, user, kicked_by):
-        self.events.put("callback_room_left {!s}".format(room))
+        self.events.put('callback_room_left {!s}'.format(room))
 
     def callback_room_topic(self, room):
-        self.events.put("callback_room_topic {}".format(room.topic))
+        self.events.put('callback_room_topic {}'.format(room.topic))
 
     def purge(self):
-        log.info("purge")
+        log.info('purge')
+```
         self.events = Queue()
