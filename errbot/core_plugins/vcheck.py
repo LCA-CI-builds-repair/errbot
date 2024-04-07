@@ -44,6 +44,7 @@ class VersionChecker(BotPlugin):
         version = VERSION
         major_py_version = PY_VERSION.partition(".")[0]
 
+```python
         # noinspection PyBroadException
         try:
             possible_versions = requests.get(HOME).json()
@@ -51,8 +52,9 @@ class VersionChecker(BotPlugin):
                 f"python{major_py_version}", VERSION
             )
             self.log.debug("Latest Errbot version is: %s", version)
-        except (HTTPError, URLError, ConnectionError, JSONDecodeError):
-            self.log.info("Could not establish connection to retrieve latest version.")
+        except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError, json.decoder.JSONDecodeError) as e:
+            self.log.info(f"Could not establish connection to retrieve latest version due to error: {e}")
+```
         return version
 
     def _async_vcheck(self):
