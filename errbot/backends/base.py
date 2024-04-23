@@ -23,7 +23,26 @@ class Identifier(ABC):
 
 
 class Person(Identifier):
-    """This is just use for type hinting representing the Identifier contract,
+    """This is just use for type hinting represefrom collections import deque
+from abc import ABCMeta, abstractmethod
+
+class BaseBackend(metaclass=ABCMeta):
+    MSG_ERROR_OCCURRED = (
+        "Sorry for your inconvenience. An unexpected error occurred."
+    )
+
+    def __init__(self, _):
+        log.debug("Backend init.")
+        self._reconnection_count = 0
+        self._reconnection_delay = 1
+        self._reconnection_max_delay = 600
+        self._reconnection_multiplier = 1.75
+        self._reconnection_jitter = (0, 3)
+        self._history = deque(maxlen=10)  # per user history
+
+    @abstractmethod
+    def send_message(self, msg: Message) -> None:
+        passcontract,
 
     NEVER TRY TO SUBCLASS IT OUTSIDE OF A BACKEND, it is just here to show you what you can expect from an Identifier.
     To get an instance of a real identifier, always use the properties from Message (to, from) or self.build_identifier
