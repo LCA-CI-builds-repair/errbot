@@ -3,7 +3,19 @@
 #  This is the config-template for Err. This file should be copied and   #
 #  renamed to config.py, then modified as you see fit to run Errbot      #
 #  the way you like it.                                                  #
-#                                                                        #
+#      # XMPP_SSL_VERSION = ssl.PROTOCOL_TLSv1_2
+
+# Message rate limiting for the IRC backend. This will delay subsequent
+# messages by this many seconds (floats are supported). Setting these
+# to a value of 0 effectively disables rate limiting.
+IRC_CHANNEL_RATE = 1  # Regular channel messages
+IRC_PRIVATE_RATE = 1  # Private messagesRIVATE_RATE = 1  # Private messages
+# IRC_RECONNECT_ON_KICK = 5  # Reconnect back to a channel after a kick (in seconds)
+# Put it at None if you don't want the chat to
+# reconnect
+# IRC_RECONNECT_ON_DISCONNECT = 5  # Reconnect back to a channel after a disconnection (in seconds)
+
+# The pattern to build a user representation from for ACL matches.                                                           #
 #  As this is a regular Python file, note that you can do variable       #
 #  assignments and the likes as usual. This can be useful for example if #
 #  you use the same values in multiple places.                           #

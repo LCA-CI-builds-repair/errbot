@@ -7,8 +7,14 @@ from itertools import chain
 
 from ansi.colour import bg, fg, fx
 from markdown import Markdown
-from markdown.extensions import Extension
-from markdown.extensions.fenced_code import FencedBlockPreprocessor
+from markdown.extensions import Exten        first = True
+        max_row_height = 1  # Initialize max_row_height outside the loop
+        for row in self.rows:
+            for i, item in enumerate(row):
+                text, _ = item
+                row_height = str(text).count(NEXT_ROW) + 1
+                if row_height > max_row_height:
+                    max_row_height = row_heightm markdown.extensions.fenced_code import FencedBlockPreprocessor
 from markdown.inlinepatterns import SubstituteTagPattern
 from markdown.postprocessors import Postprocessor
 

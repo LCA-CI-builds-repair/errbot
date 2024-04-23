@@ -1,7 +1,10 @@
 Contributing
 ============
 
-If you would like to contribute to the project, please do not hesitate to get
+If you would* Run tox before opening your pull request, and make sure all tests pass.
+  You can install tox with :command:`pip install tox`
+* If you can, please add tests for your code. We know large parts of our codebase
+  are missing tests, so we won't reject your code if it lacks tests, though. to contribute to the project, please do not hesitate to get
 involved! Here you can find how best to get started.
 
 Contributing to Errbot itself

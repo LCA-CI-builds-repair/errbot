@@ -1,7 +1,13 @@
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
- Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
+ Copyright (C) 2007 Free Software Foundthe source code needed to generate, install, and (for an executable
+work) run the object code and to modify the work, including scripts to
+    with subsection 6b.
+
+    d) Convey the object code by offering access from a designated location.trol those activities.  However, it does not include the work's
+System Libraries, or general-purpose tools or generally available free
+software.n, Inc. <http://fsf.org/>
  Everyone is permitted to copy and distribute verbatim copies
  of this license document, but changing it is not allowed.
 
