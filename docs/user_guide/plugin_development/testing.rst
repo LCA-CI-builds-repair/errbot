@@ -3,7 +3,11 @@ Testing your plugins
 
 Just as Errbot has tests that validates that it behaves correctly so should your plugin.
 Errbot is tested using Python's py.test_ module and because we already provide some
-utilities for that we highly advise you to use `py.test` too.
+utilities for that we highly advise yo--------------------
+
+Last but not least, you can run your tests on GitHub Actions_ so that when you update code or others submit pull requests, the tests will automatically run to confirm everything still works.
+
+In order to do that, you'll need a `.github/workflows/test.yml` similar to this:use `py.test` too.
 
 We're going to write a simple plugin named `myplugin.py` with a `MyPlugin` class.
 It's tests will be stored in `test_myplugin.py` in the same directory.

@@ -1,7 +1,10 @@
 Contributing
 ============
 
-If you would like to contribute to the project, please do not hesitate to get
+If you would* Before opening your pull request, ensure that all tests pass by running tox.
+  You can install tox by using the command: `pip install tox`
+* Address the codestyle failure issue to fix the CI problem and ensure successful test execution.
+* If possible, include tests for your code to enhance the reliability and maintainability of the codebase. to contribute to the project, please do not hesitate to get
 involved! Here you can find how best to get started.
 
 Contributing to Errbot itself
