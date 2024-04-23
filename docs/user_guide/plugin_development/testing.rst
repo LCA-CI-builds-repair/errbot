@@ -3,7 +3,13 @@ Testing your plugins
 
 Just as Errbot has tests that validates that it behaves correctly so should your plugin.
 Errbot is tested using Python's py.test_ module and because we already provide some
-utilities for that we highly advise you to use `py.test` too.
+utilities for that we highlyYou can now have a look at coverage statistics through :command:`coverage report`::
+
+    Name        Stmts   Miss  Cover
+    -------------------------------
+    myplugin      49      0   100%
+
+It's also possible to generate an HTML report with :command:`coverage html` and opening the resulting `htmlcov/index.html`.you to use `py.test` too.
 
 We're going to write a simple plugin named `myplugin.py` with a `MyPlugin` class.
 It's tests will be stored in `test_myplugin.py` in the same directory.

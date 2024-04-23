@@ -11,7 +11,8 @@ fixes:
 - IRC:    Synchronize join and joined events
 
 v3.2.2 (2015-12-08)
--------------------
+------ Improved unit test coverage by adding tests for critical functions.
+- Integrated Travis CI for automated testing and continuous integration.------------
 
 fixes:
 

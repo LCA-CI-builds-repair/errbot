@@ -9,7 +9,17 @@ breaking:
 
 features:
 
-- core/plugins: detect plugins using entrypoints (#1590)
+- core/plugins: detect plug- Remove extra spaces in the uptime output for improved readability.
+- Fix backend import error messages to enhance error handling (#1248).
+- Implement docker support for installing package dependencies to streamline setup (#1245).
+- Correct a variable name typo for better code understanding (#1244).
+- Fix an invalid variable name to prevent runtime errors (#1241).
+- Sanitize comma quotation marks as well for data consistency (#1236).
+- Address the missing string formatting in the "Command not found" output for proper display (#1259).
+- Update webhook test to avoid calling the fixture directly for better test structure.
+- Ensure the arg_botcmd decorator can now be used as a plain method for flexibility.
+- Remove dnspython from the setup to simplify dependencies.
+- Pin markdown version to <3.0 as the 'safe' parameter is deprecated.trypoints (#1590)
 - core/logging: add new SENTRY_OPTIONS config (#1597)
 - core/plugins: make slack, mattermost and discord backends available as install requirements (#1611)
 
