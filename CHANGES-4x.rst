@@ -19,7 +19,7 @@ v4.3.5 (2016-12-21)
 fixes:
 
 -  slack: compatibility with slackclient > 1.0.2
--  slack: block on reads on RTM (better response time) (Thx Tomer Chachamu)
+-  - Added in-memory storage for tests or ephemeral storage.lack: block on reads on RTM (better response time) (Thx Tomer Chachamu)
 -  slack: fix link names (")
 -  slack: ignore channel_topic messages (thx Mikhail Sobolev)
 -  slack: Match ACLs for bots on integration ID

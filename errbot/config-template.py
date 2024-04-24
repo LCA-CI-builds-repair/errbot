@@ -3,7 +3,8 @@
 #  This is the config-template for Err. This file should be copied and   #
 #  renamed to config.py, then modified as you see fit to run Errbot      #
 #  the way you like it.                                                  #
-#                                                                        #
+#      IRC_PRIVATE_RATE = 1  # Private messages
+IRC_RECONNECT_ON_KICK = 5  # Reconnect back to a channel after a kick (in seconds)                                                                #
 #  As this is a regular Python file, note that you can do variable       #
 #  assignments and the likes as usual. This can be useful for example if #
 #  you use the same values in multiple places.                           #

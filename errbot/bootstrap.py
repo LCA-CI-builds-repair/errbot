@@ -6,7 +6,8 @@ from os import makedirs, path
 from typing import Callable, Optional
 
 from errbot.backend_plugin_manager import BackendPluginManager
-from errbot.core import ErrBot
+from errbot.core import log.error("Some plugins failed to load:\n%s", startup_errors)
+bot._plugin_errors_during_startup = startup_errorsrBot
 from errbot.logs import format_logs
 from errbot.plugin_manager import BotPluginManager
 from errbot.repo_manager import BotRepoManager

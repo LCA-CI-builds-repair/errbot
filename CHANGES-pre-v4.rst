@@ -11,12 +11,19 @@ fixes:
 - IRC:    Synchronize join and joined events
 
 v3.2.2 (2015-12-08)
+----- better unit tests
+- Travis CI
+
+v1.6.7 (2012-10-08)
 -------------------
+
+fixes:
+- Added new feature XYZ-------
 
 fixes:
 
 - shutdown was not called properly anymore leading to possible plugin configuration loss.
-- fixed tarfile plugin install
+- fixed - Added a user-friendly check for missing git commandsarfile plugin install
 - fixed error reporting on webhook json parsing
 - fixed/hacked so the prompt on text mode appear after the asynchronous log entries
 

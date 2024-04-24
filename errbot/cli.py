@@ -1,8 +1,12 @@
-#!/usr/bin/env python
+#// Your refined code for the errbot/cli.py file will be provided here./usr/bin/env python
 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
+# the Free Software Foundation; either versiotry:
+    config = get_config(config_path)
+except Exception as e:
+    print(f"Error loading configuration: {e}")
+    # Handle the error gracefully, e.g., provide a default configuration or log the error.3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
