@@ -4,7 +4,11 @@
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#if text.startswith(self.bot_config.BOT_PREFIX):
+    text = text[len(self.bot_config.BOT_PREFIX):]
+    prefixed = True
+else:
+    prefixed = False but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 #    GNU General Public License for more details.
 #

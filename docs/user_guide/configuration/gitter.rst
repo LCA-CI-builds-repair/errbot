@@ -1,7 +1,24 @@
 Gitter Backend
 ==============
+BACKEND = 'Gitter'
+BOT_EXTRA_BACKEND_DIR = '/path_to/backend'
 
-This is a backend for `Gitter <http://gitter.im>`_ for errbot.
+Authentication
+--------------
+
+From there, you can either add an application or use a personal token from a user reserved for the bot.
+
+Adding an application, workflow for authentication
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. pip install bottle requests
+2. execute the script: `./oauth.py` and it will guide you
+
+Adding as a real user
+~~~~~~~~~~~~~~~~~~~~~
+1. Authenticate as the bot user (new incognito window helps ;)
+2. Go visit https://developer.gitter.im/apps
+3. Use the token directly in your config.py:
+http://gitter.im>`_ for errbot.
 The source code is hosted on `github <https://github.com/errbotio/err-backend-gitter>`_.
 
 .. image:: https://raw.githubusercontent.com/errbotio/err-backend-gitter/master/screenshot.png

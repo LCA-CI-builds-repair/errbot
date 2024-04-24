@@ -3,7 +3,46 @@ Testing your plugins
 
 Just as Errbot has tests that validates that it behaves correctly so should your plugin.
 Errbot is tested using Python's py.test_ module and because we already provide some
-utilities for that we highly advise you to use `py.test` too.
+util        expected = "This is my awesome command"
+        result = myplugin.MyPlugin.mycommand_helper()
+        assert result == expected
+
+    def test_mycommand_another_helper(testbot):
+        plugin = testbot._bot.plugin_manager.get_plugin_obj_by_name('MyPlugin')
+        expected = "This is another awesome command"
+        result = plugin.mycommand_another_helper()
+        assert result == expected
+
+You can now simply run :command:`py.test` to execute the tests.
+
+PEP-8 and code coverage
+-----------------------
+
+If you feel like it, you can also add syntax checkers like `pep8` into the mix to validate your code adheres to certain stylistic best practices set out in PEP-8.
+
+First, install the `pep8` for `py.test`: :command:`pip install pytest-pep8`.
+
+Then, simply add `--pep8` to the test invocation command: `py.test --pep8`.
+
+You may also want to assess how well your tests cover your code.
+
+To that end, install `coverage`: :command:`pip install coverage` and then run your tests like this: :command:`coverage run --source myplugin -m py.test --pep8`.
+
+You can now view coverage statistics through :command:`coverage report`::
+
+    Name        Stmts   Miss  Cover
+    -------------------------------
+    myplugin      49      0   100%
+
+It's also possible to generate an HTML report with :command:`coverage html` and opening the resulting `htmlcov/index.html`.
+
+Travis and Coveralls
+--------------------
+
+Last but not least, you can run your tests on Travis-CI_ so that when you update code or others submit pull requests, the tests will automatically run to confirm everything still works.
+
+To achieve that, you'll need a `.travis.yml` similar to this:
+e `py.test` too.
 
 We're going to write a simple plugin named `myplugin.py` with a `MyPlugin` class.
 It's tests will be stored in `test_myplugin.py` in the same directory.

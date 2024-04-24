@@ -6,7 +6,27 @@ from os import makedirs, path
 from typing import Callable, Optional
 
 from errbot.backend_plugin_manager import BackendPluginManager
-from errbot.core import ErrBot
+from errb        if restore:
+            # Prepare the context for the restore script
+            if "repos" in bot:
+                log.fatal("You cannot restore onto a non-empty bot.")
+                sys.exit(-1)
+            log.info(f"**** RESTORING the bot from {restore}")
+            restore_bot_from_backup(restore, bot=bot, log=log)
+            print("Restore complete. You can restart the bot normally")
+            sys.exit(0)
+
+        try:
+            errors = bot.plugin_manager.update_plugin_places(
+                repo_manager.get_all_repos_paths()
+            )
+            if errors:
+                startup_errors = "\n".join(errors.values())
+                log.error("Some plugins failed to load:\n%s", startup_errors)
+                bot._plugin_errors_during_startup = startup_errors
+            return bot
+        except Exception as e:
+            log.exception("Unable to load or configure the backend: %s", e)t
 from errbot.logs import format_logs
 from errbot.plugin_manager import BotPluginManager
 from errbot.repo_manager import BotRepoManager

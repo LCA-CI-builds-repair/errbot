@@ -2,9 +2,43 @@
 import logging
 import os
 import subprocess
-import sys
-import traceback
-from copy import deepcopy
+import sys    """Checks if we have the correct version to run this plugin.
+    Returns true if the plugin is loadable"""
+    version = plugin_info.python_version
+
+    # If the plugin doesn't restrict anything, assume it is ok and try to load it.
+    if not version:
+        return True
+
+    sys_version = sys.version_info[:3]
+    if version < (3, 0, 0):
+        log.error(
+            "Plugin %s is designed for Python 2 only, which is not compatible with Errbo            raise
+        except Exception as e:
+            log.exception(f"Error loading {name}: {e}")
+            raise PluginActivationException(f"{name} failed to start: {e}")
+
+    def _activate_plugin_dependencies(
+        self, name: str, dep_track: Set[str]
+    ) -> List[str]:
+        plugin_info = self.plugin_infos[name]
+        dep_track.add(name)",
+            plugin_info.name,
+        )
+        log.error("Please contact the plugin developer or contribute to port the plugin to Python 3.")
+        return False
+
+    if version > sys_version:
+        log.error(
+            "Plugin %s requires Python >= %s, but this Errbot instance is running %s.",
+            plugin_info.name,
+            ".".join(str(v) for v in version),
+            ".".join(str(v) for v in sys_version),
+        )
+        log.error("Upgrade your Python interpreter to use this plugin.")
+        return False
+
+    return Trueport deepcopy
 from graphlib import CycleError
 from graphlib import TopologicalSorter as BaseTopologicalSorter
 from pathlib import Path

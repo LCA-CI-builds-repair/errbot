@@ -23,7 +23,36 @@ class Identifier(ABC):
 
 
 class Person(Identifier):
-    """This is just use for type hinting representing the Identifier contract,
+    """This is just use for type hinting represeclass BaseBackend:
+    def __init__(self, _):
+              """
+        Connect the back-end to the server and serve forever.
+
+        Back-ends MAY choose to re-implement this method, in which case
+        they are responsible for implementing reconnection logic themselves.
+
+        Back-ends SHOULD trigger :func:`~connect_callback()` and
+        :func:`~disconnect_callback()` themselves after connection/disconnection.
+        """
+        while True:
+            try:
+                # Attempt to serve once and check for shutdown request
+                if self.serve_once():
+                    break  # Truth-y exit from serve_once means shutdown was requested
+            except KeyboardInterrupt:
+                log.info("Interrupt received, shutting down..")
+                break
+            except Exception as e:
+                log.exception("Exception occurred in serve_once: %s", e)e BaseBackend class."""
+        log.debug("Backend init.")
+        self._reconnection_count = 0  # Increments with each failed (re)connection
+        self._reconnection_delay = 1  # Amount of seconds the bot will sleep on the next reconnection attempt
+        self._reconnection_max_delay = 600  # Maximum delay between reconnection attempts
+        self._reconnection_multiplier = 1.75  # Delay multiplier
+        self._reconnection_jitter = (0, 3)  # Random jitter added to delay (min, max)
+        self.user_history = lambda: deque(maxlen=10)  # Per user history
+
+    MSG_ERROR_OCCURRED = "Sorry for your inconvenience. An unexpected error occurred."er contract,
 
     NEVER TRY TO SUBCLASS IT OUTSIDE OF A BACKEND, it is just here to show you what you can expect from an Identifier.
     To get an instance of a real identifier, always use the properties from Message (to, from) or self.build_identifier

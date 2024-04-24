@@ -3,8 +3,19 @@ v9.9.9 (unreleased)
 
 breaking:
 
-- backend/slack: remove slack and slack_rtm built-in backends (#1581)
-- core/logging: deprecate SENTRY_TRANSPORT config (#1604)
+- backend/slack: remove slack and slack_rtm built-in backends (#1581Fixes:
+------
+
+- Core: Fix AttributeError on Blacklisted plugins (#1369)
+
+Chores:
+-------
+
+- Remove travis configuration (#1478)
+- Perform minor code cleanup (#1465)
+- Update code style to adhere to black codestyle (#1457, #1485)
+- Use twine to check distribution (#1485)
+- Remove codeclimate and eslint configurations (#1490)e/logging: deprecate SENTRY_TRANSPORT config (#1604)
 - core: removing py37 support (#1652)
 
 features:

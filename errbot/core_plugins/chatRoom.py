@@ -1,6 +1,25 @@
-import logging
+iimport logging
 
 from errbot import BotPlugin, SeparatorArgParser, ShlexArgParser, botcmd
+from errbot.backends.base import RoomNotJoinedError
+
+log = logging.getLogger(__name__)
+
+class ChatRoom(BotPlugin):
+    connected = False
+
+    def callback_connect(self):
+        log.info("Connecting bot chatrooms")
+        if not self.connected:
+            self.connected = True
+            for room in self.bot_config.CHATROOM_PRESENCE:
+                log.debug("Trying to join room %s", repr(room))
+                try:
+                    self._join_room(room)
+                except RoomNotJoinedError as e:
+                    log.error(f"Failed to join room {repr(room)}: {e}")
+                except Exception as ex:
+                    log.exception(f"An error occurred while joining room {repr(room)}: {ex}")rbot import BotPlugin, SeparatorArgParser, ShlexArgParser, botcmd
 from errbot.backends.base import RoomNotJoinedError
 
 log = logging.getLogger(__name__)
