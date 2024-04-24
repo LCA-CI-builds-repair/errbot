@@ -1,7 +1,16 @@
 Testing your plugins
 ====================
 
-Just as Errbot has tests that validates that it behaves correctly so should your plugin.
+Just as Errbot hasHelper methods
+--------------
+
+Often enough you'll have methods in your plugins that do things for you that are not decorated with `@botcmd` since the user never calls out To that end, install coverage: `pip install coverage` and then run your tests like this: `coverage run --source myplugin -m py.test --pep8`.
+
+You can now view coverage statistics with `coverage report`:
+directly.
+
+Such helper methods can be either instance methods, methods that take `self` as the first argument because they need access to data stored on the bot or class or static methods, decorated with either `@classmethod` or `@staticmethod`:
+dates that it behaves correctly so should your plugin.
 Errbot is tested using Python's py.test_ module and because we already provide some
 utilities for that we highly advise you to use `py.test` too.
 

@@ -4,8 +4,15 @@ v5.2.0 (2018-04-04)
 fixes:
 
 -  backup fix : SyntaxError: literal_eval on file with statements (thx
-   Bruno Oliveira)
--  plugin_manager: skip plugins not in CORE_PLUGIN entirely (thx Dylan
+   Br- Fix crash handling in templated cmd errors
+- Fix Slack crash with messages containing only attachments
+- Fix corner case links in Slack (Thanks Tomer Chachamu)
+- Improve LRU performance for large teams in Slack
+- Fix 'username' key undefined error in Slack when bot doesn't have one (Thanks Octavio Antonelli)
+- Use conftest module for specifying testbot fixture location in tests (Thanks Pavel Savchenko)
+- Added Python 3.6.x to Travis CI
+- Ported yield tests to pytest 4.0
+- Removed deprecated dependency for threadpool, now uses standard one (Thanks Muri Nicanor)lugin_manager: skip plugins not in CORE_PLUGIN entirely (thx Dylan
    Page)
 -  repository search fix (thx Sijis)
 -  Text: mentions in the Text backend (thx Sijis)

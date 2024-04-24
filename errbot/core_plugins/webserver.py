@@ -7,8 +7,12 @@ from threading import Thread
 from urllib.request import unquote
 
 from OpenSSL import crypto
-from webtest import TestApp
-from werkzeug.serving import ThreadedWSGIServer
+from webtest import TestApp        suggested_config["SSL"]["enabled"] = True
+        suggested_config["SSL"]["host"] = suggested_config["HOST"]
+        suggested_config["SSL"]["port"] = suggested_config["PORT"] + 443
+        suggested_config["SSL"]["key"] = key_path
+        suggested_config["SSL"]["certificate"] = cert_path
+        return "To enable SSL with this certificate, the following config is recommended: {}".format(suggested_config)erkzeug.serving import ThreadedWSGIServer
 
 from errbot import BotPlugin, botcmd, webhook
 from errbot.core_plugins import flask_app

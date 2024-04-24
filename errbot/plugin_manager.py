@@ -12,7 +12,16 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple, Type
 
 from errbot.flow import BotFlow, Flow
 from errbot.repo_manager import check_dependencies
-from errbot.storage.base import StoragePluginBase
+from errbot.stora        for name, flow in self.flows.items():
+            try:
+                if not flow.is_activated:
+           except Exception as e:
+            log.exception(f"Error loading {name}: {e}")
+            raise PluginActivationException(f"{name} failed to start: {e}")             log.error("Error loading flow %s: Flow not activated.", name)
+                    self.activate_flow(name)
+            except Exception as e:
+                log.exception(f"Error loading flow {name}: {e}")
+                errors += f"Error: flow {name} failed to start: {e}.\n"import StoragePluginBase
 
 from .botplugin import BotPlugin
 from .core_plugins.wsview import route

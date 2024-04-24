@@ -1,7 +1,23 @@
 v9.9.9 (unreleased)
--------------------
-
-breaking:
+---------------- Detecting entry point plugins
+- Bump mr-smithers-excellent/d- core/cli: Fix failure with relative directory in --init (#1511)
+- backend/xmpp: Include delayed message for send/received messages (#1270)
+- backend/xmpp: Fix "unexpected keyword argument 'wait'" issue during connection (#1507)
+- docs: Update broken readme link to plugin development docs (#1504)
+- Close threadpool on exit (#1486)
+- docs: Update backend screenshots and remove Google+ references (#1499, #1497)
+- core: Split messages using `split()` instead of whitespace (#1496)
+- chore/plugin: Improve whoami formatting (#1459)
+- backend/GUI: Remove GUI backend (#1495)
+- core: Add support for Python 3.9 (#1477)
+- chore: Allow Dependabot to check GitHub actions weekly (#1464)
+- chore: Add Dockerfile (#1482)on
+- Fix example code in the testing section
+- Update all core dependencies
+- Use template file for webserver plugin echo output
+- Update repos.json
+- Add readthedocs yaml config
+- Fix broken integration testseaking:
 
 - backend/slack: remove slack and slack_rtm built-in backends (#1581)
 - core/logging: deprecate SENTRY_TRANSPORT config (#1604)

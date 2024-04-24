@@ -3,7 +3,45 @@ v3.2.3 (2016-02-18)
 
 fixes:
 
-- IRC:    Use the NickMask helper for parsing IRC Identity and proper ACL (thx Marcus Carlsson)
+- IRC:    Use the NickMask helper for parsing IRC Iden- Improve error message for unblacklisting (Thanks Sijis)
+- Respect optional prefix for re_botcmd (Thanks Travis Veazey)
+- Fix pytest breakage on dependencies (Thanks Joel Perras)
+- Fix !help foo bar for foo_bar comman- Complete refactor and fixes with a static analyzer
+- Enhance feedback when config.py is corrupted
+- Rewrite of HipCha- Fix unicode encoding issue on Jabber
+
+v1.7.0 (2012-12-24)
+-------------------
+
+Incompatible changes:
+- Update PLUGIN_DIR to self.plugin_dir for runtime value usage
+
+Fixes:
+- Ensure compatibility with yapsy 1.10
+- Improve detection of self in MUC
+- Force Python 2 for shebang lines
+- Parse real nick and room for message identity
+- Resolve JID Instance attribute '__len__' issue
+- Provide partial support for '@' in JIDs nodes
+- Fix connection notification issue after plugin reload
+
+Features:
+- Make botprefix optional in one-on-one chats
+- Implement fine-grained access control
+- Enhance disk serialization with default protocol 2
+- Configure separate rate limiting for public and private IRC chats
+- Add support for MUC with passwords
+- Allow bot prefixes of any length
+- Introduce modular !help command for plugin listing
+
+Other:
+- Enhance unit tests
+- Implement Travis CI integration consistency between properties and setters/getters
+- Fixes for macOS (Thanks Andrii Kostenko)
+- Unicode fix for IRC backend (Thanks Sijis Aviles)s O'Beirne)
+- Fix path report for config.py in case of problem
+- Resolve issue with yield in @arg_botcmd (Thanks Andre Van Der Merwe)
+- Backup/restore functionality fixes proper ACL (thx Marcus Carlsson)
 - IRC:    Fix random UnicodeDecodeErrors  (thx mr.Shu)
 - XMPP:   Fix join on MUCRoom with password (thx Mikko Lehto)
 - XMPP:   Fix join on Room list (from CHATROOM_PRESENCE for example) (thx Mikko Lehto)

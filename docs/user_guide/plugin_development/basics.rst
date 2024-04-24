@@ -6,9 +6,28 @@ world!"* plugin as an example:
 
 .. code-block:: python
 
-    from errbot import BotPlugin, botcmd
+    from errbot import BotPlugin, botc        """Example 'Hello, world!' plugin for Errbot"""
+        
+        # Add missing import statement for invert_string function
+        from my_utils import invert_string
 
-    class HelloWorld(BotPlugin):
+        @botcmd
+        def hello(self, msg, args):
+            """Say hello to the world"""
+            return invert_string("Hello, world!")
+
+Packaging
+---------
+
+A plugin can be packaged and distributed through pypi.org. The errbot plugin system uses entrypoints in setuptools to find available plugins.
+
+The two entrypoints available are:
+
+* `errbot.plugins` - for normal plugins and flows
+* `errbot.backend_plugins` - for backend plugins used with collaboration providers
+
+To configure the setup, add the following block of code to `setup.py`:
+
         """Example 'Hello, world!' plugin for Errbot"""
 
         @botcmd

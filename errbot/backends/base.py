@@ -25,7 +25,25 @@ class Identifier(ABC):
 class Person(Identifier):
     """This is just use for type hinting representing the Identifier contract,
 
-    NEVER TRY TO SUBCLASS IT OUTSIDE OF A BACKEND, it is just here to show you what you can expect from an Identifier.
+    NEVER TRY TO SUBCLASS         """
+        Connect the back-end to the server and serve forever.
+
+        Back-ends MAY choose to re-implement this method, in which case
+        they are responsible for implementing reconnection logic themselves.
+
+        Back-ends SHOULD trigger :func:`~connect_callback()` and
+        :func:`~disconnect_callback()` themselves after connection/disconnection.
+        """
+        while True:
+            try:
+                if self.serve_once():
+                    log.info("Shutdown requested, shutting down..")
+                    break  # Truth-y exit from serve_once means shutdown was requested
+            except KeyboardInterrupt:
+                log.info("Interrupt received, shutting down..")
+                break
+            except Exception as e:
+                log.exception("Exception occurred in serve_once: {}".format(e))CKEND, it is just here to show you what you can expect from an Identifier.
     To get an instance of a real identifier, always use the properties from Message (to, from) or self.build_identifier
     to make an identifier from a String.
     """

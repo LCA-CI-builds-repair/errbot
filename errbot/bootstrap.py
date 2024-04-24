@@ -6,7 +6,14 @@ from os import makedirs, path
 from typing import Callable, Optional
 
 from errbot.backend_plugin_manager import BackendPluginManager
-from errbot.core import ErrBot
+from errb        if restore:
+            # Prepare the context for the restore script
+            if "repos" in bot:
+                log.error("You cannot restore onto a non empty bot.")
+                sys.exit(-1)
+            log.info(f"**** RESTORING the bot from {restore}")
+            restore_bot_from_backup(restore, bot=bot, log=log)
+            sys.exit(0)mport ErrBot
 from errbot.logs import format_logs
 from errbot.plugin_manager import BotPluginManager
 from errbot.repo_manager import BotRepoManager
