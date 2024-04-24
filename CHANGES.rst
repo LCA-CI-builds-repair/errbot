@@ -3,7 +3,22 @@ v9.9.9 (unreleased)
 
 breaking:
 
-- backend/slack: remove slack and slack_rtm built-in backends (#1581)
+- backend/slacFeatures:
+- backend/test: shutdown sequence to address test failure (#1535)
+- docs: update spark plugin reference (#1546)
+
+Fixes:
+- core: various minor logging improvements (#1536)
+- fix: python 2 version references in docs and init template (#1543)
+
+Deprecations:
+- backends: deprecate built-in Slack and SlackRTM (#1526)
+
+Chores:
+- chore: various minor formatting improvements (#1541)
+- chore: remove python 3.6 checks and test environment (#1540)
+- chore: add/update issue templates (#1554)
+- chore: pin all package dependencies (#1553, #1559) slack and slack_rtm built-in backends (#1581)
 - core/logging: deprecate SENTRY_TRANSPORT config (#1604)
 - core: removing py37 support (#1652)
 

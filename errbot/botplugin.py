@@ -4,7 +4,37 @@ import shlex
 from io import IOBase
 from threading import Timer, current_thread
 from types import ModuleType
-from typing import Any, Callable, List, Mapping, Optional, Sequence, Tuple
+from class BotPlugin:
+    """class BotPlugin:
+   self.log = logging.getLogger(f"errbot.plugins.{name}")"""Base class for Errbot plugin classes."""
+    
+    def __init__(self, bot):
+        self.bot = bot
+        self.is_activated = False
+        self.current_pollers = []
+    
+    def callback_connect(self):
+        """Callback method for plugin connection."""
+        pass
+    
+    def callback_disconnect(self):
+        """Callback method for plugin disconnection."""
+        pass
+    
+    # Add more common methods and attributes as neededse class for Errbot plugin classes."""
+    
+    def __init__(self, bot):
+        self.bot = bot
+    
+    def callback_connect(self):
+        """Callback method for plugin connection."""
+        pass
+    
+    def callback_disconnect(self):
+        """Callback method for plugin disconnection."""
+        pass
+    
+    # Add more common methods and attributes as neededyping import Any, Callable, List, Mapping, Optional, Sequence, Tuple
 
 from errbot.backends.base import (
     ONLINE,

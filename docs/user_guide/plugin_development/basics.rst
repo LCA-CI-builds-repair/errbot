@@ -8,7 +8,7 @@ world!"* plugin as an example:
 
     from errbot import BotPlugin, botcmd
 
-    class HelloWorld(BotPlugin):
+    class Hell# Content remains empty as the code-block directive is removed.orld(BotPlugin):
         """Example 'Hello, world!' plugin for Errbot"""
 
         @botcmd

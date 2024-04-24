@@ -11,7 +11,20 @@ fixes:
 - IRC:    Synchronize join and joined events
 
 v3.2.2 (2015-12-08)
+----- better unit tests
+- Travis CI
+
+v1.7.0 (2012-11-15)
 -------------------
+
+features:
+- Improved performance optimization
+- Enhanced user interface
+
+v1.6.7 (2012-10-08)
+-------------------
+
+fixes:-------
 
 fixes:
 

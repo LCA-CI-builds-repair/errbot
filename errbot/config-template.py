@@ -1,7 +1,9 @@
-##########################################################################
+## This is the config-template for Errbot. 
+# Copy and rename this file to config.py, then customize it to suit your Errbot configuration preferences.#####################################################################
 #                                                                        #
 #  This is the config-template for Err. This file should be copied and   #
-#  renamed to config.py, then modified as you see fit to run Errbot      #
+#  renamedIRC_PRIVATE_RATE = 1  # Private messages
+IRC_RECONNECT_ON_KICK = 5  # Reconnect back to a channel after a kick (in seconds)o config.py, then modified as you see fit to run Errbot      #
 #  the way you like it.                                                  #
 #                                                                        #
 #  As this is a regular Python file, note that you can do variable       #
