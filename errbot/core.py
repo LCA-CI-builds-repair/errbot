@@ -324,8 +324,8 @@ class ErrBot(Backend, StoreMixin):
                 'Assuming "%s" to be a command because BOT_PREFIX_OPTIONAL_ON_CHAT is True',
                 text,
             )
-            # In order to keep noise down we surpress messages about the command
-            # not being found, because it's possible a plugin will trigger on what
+            # In order to keep noise down we suppress messages about the command
+            # not being found because it's possible a plugin will trigger on what
             # was said with trigger_message.
             suppress_cmd_not_found = True
         elif not text.startswith(self.bot_config.BOT_PREFIX):

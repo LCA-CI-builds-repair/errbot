@@ -309,7 +309,8 @@ class BotPluginBase(StoreMixin):
         t.daemon = True  # so it is not locking on exit
         t.start()
 
-    def poller(
+    def poller(self, interval, method, times, args, kwargs):
+        pass
         self,
         interval: float,
         method: Callable[..., None],

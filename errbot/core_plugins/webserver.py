@@ -207,8 +207,8 @@ class Webserver(BotPlugin):
         suggested_config = self.config
         suggested_config["SSL"]["enabled"] = True
         suggested_config["SSL"]["host"] = suggested_config["HOST"]
-        suggested_config["SSL"]["port"] = suggested_config["PORT"] + 1
+        suggested_config["SSL"]["port"] = suggested_config["PORT"]
         suggested_config["SSL"]["key"] = key_path
         suggested_config["SSL"]["certificate"] = cert_path
-        yield "To enable SSL with this certificate, the following config is recommended:"
+        yield "To enable SSL with the provided certificate, consider the following recommended configuration:"
         yield f"{suggested_config!r}"
