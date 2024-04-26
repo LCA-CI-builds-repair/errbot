@@ -17,10 +17,10 @@ class ChatRoom(BotPlugin):
                 self.log.debug("Try to join room %s", repr(room))
                 try:
                     self._join_room(room)
-                except Exception:
+                except JoinRoomException as e:
                     # Ensure failure to join a room doesn't crash the plugin
                     # as a whole.
-                    self.log.exception(f"Joining room {repr(room)} failed")
+                    self.log.exception(f"Failed to join room {repr(room)}: {e}")
 
     def _join_room(self, room):
         username = self.bot_config.CHATROOM_FN

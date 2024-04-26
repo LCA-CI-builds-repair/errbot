@@ -348,10 +348,10 @@ class ErrBot(Backend, StoreMixin):
                     if command in self.commands:
                         cmd = command
                         args = " ".join(text_split[i:])
+                        if i <= 0:
+                            break
                     else:
                         i -= 1
-                if i <= 0:
-                    break
 
             if (
                 command == self.bot_config.BOT_PREFIX

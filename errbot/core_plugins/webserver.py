@@ -205,10 +205,10 @@ class Webserver(BotPlugin):
         yield f"Certificate successfully generated and saved in {self.bot_config.BOT_DATA_DIR}."
 
         suggested_config = self.config
-        suggested_config["SSL"]["enabled"] = True
-        suggested_config["SSL"]["host"] = suggested_config["HOST"]
-        suggested_config["SSL"]["port"] = suggested_config["PORT"] + 1
-        suggested_config["SSL"]["key"] = key_path
-        suggested_config["SSL"]["certificate"] = cert_path
-        yield "To enable SSL with this certificate, the following config is recommended:"
+        config["SSL"]["enabled"] = True
+        config["SSL"]["host"] = config["HOST"]
+        config["SSL"]["port"] = config["PORT"] + 1
+        config["SSL"]["key"] = key_path
+        config["SSL"]["certificate"] = cert_path
+        yield "To enable SSL using the provided certificate, consider using the following configuration:"
         yield f"{suggested_config!r}"

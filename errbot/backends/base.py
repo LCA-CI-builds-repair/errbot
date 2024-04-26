@@ -808,10 +808,9 @@ class Backend(ABC):
         """Those arguments will be directly those put in BOT_IDENTITY"""
         log.debug("Backend init.")
         self._reconnection_count = 0  # Increments with each failed (re)connection
-        self._reconnection_delay = 1  # Amount of seconds the bot will sleep on the
-        #                                     # next reconnection attempt
+        self._reconnection_delay = 1  # Amount of seconds the bot will sleep before the next reconnection attempt
         self._reconnection_max_delay = (
-            600  # Maximum delay between reconnection attempts
+            600  # Maximum delay (in seconds) between reconnection attempts
         )
         self._reconnection_multiplier = 1.75  # Delay multiplier
         self._reconnection_jitter = (0, 3)  # Random jitter added to delay (min, max)
@@ -862,12 +861,12 @@ class Backend(ABC):
         they are responsible for implementing reconnection logic themselves.
 
         Back-ends SHOULD trigger :func:`~connect_callback()` and
+        Back-ends SHOULD trigger :func:`~connect_callback()` and
         :func:`~disconnect_callback()` themselves after connection/disconnection.
         """
         while True:
             try:
                 if self.serve_once():
-                    break  # Truth-y exit from serve_once means shutdown was requested
             except KeyboardInterrupt:
                 log.info("Interrupt received, shutting down..")
                 break

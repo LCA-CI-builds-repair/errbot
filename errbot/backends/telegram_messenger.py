@@ -245,7 +245,7 @@ class TelegramBackend(ErrBot):
                     self[UPDATES_OFFSET_KEY] = offset
                     log.debug("Processing update: %s", update)
                     if not hasattr(update, "message"):
-                        log.warning("Unknown update type (no message present)")
+                        log.warning("Unknown update type: No message present in the update")
                         continue
                     try:
                         self._handle_message(update.message)

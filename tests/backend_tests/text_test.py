@@ -27,7 +27,7 @@ def text_backend():
     config.BOT_ADMINS = ["@test_admin"]
 
     return TextBackend(config)
-
+import logging
 
 def test_change_presence(text_backend, caplog):
     with caplog.at_level(logging.DEBUG):

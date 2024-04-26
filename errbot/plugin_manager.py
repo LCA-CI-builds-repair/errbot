@@ -446,72 +446,9 @@ class BotPluginManager(StoreMixin):
                     log.info("Activate plugin: %s.", name)
                     self.activate_plugin(name)
             except Exception as e:
-                log.exception("Error loading %s.", name)
-                errors += f"Error: {name} failed to activate: {e}.\n"
-
-        log.debug("Activate flow plugins ...")
-        for name, flow in self.flows.items():
-            try:
-                if not flow.is_activated:
-                    log.info("Activate flow: %s", name)
-                    self.activate_flow(name)
-            except Exception as e:
-                log.exception(f"Error loading flow {name}.")
-                errors += f"Error: flow {name} failed to start: {e}.\n"
-        return errors
-
-    def get_plugins_activation_order(self) -> List[str]:
-        """
-        Calculate plugin activation order, based on their dependencies.
-
-        :return: list of plugin names, in the best order to start them.
-        """
-        plugins_graph = {
-            name: set(info.dependencies) for name, info in self.plugin_infos.items()
-        }
-        plugins_in_cycle = set()
-        while True:
-            plugins_sorter = TopologicalSorter(plugins_graph)
-            try:
-                # Return plugins which are part of a circular dependency at the end,
-                # the rest of the code expects to have all plugins returned
-                return list(plugins_sorter.static_order()) + list(plugins_in_cycle)
-            except CycleError:
-                # Remove cycle from the graph, and
-                cycle = set(plugins_sorter.find_cycle())
-                plugins_in_cycle.update(cycle)
-                for plugin_name in cycle:
-                    plugins_graph.pop(plugin_name)
-
-    def _activate_plugin(self, plugin: BotPlugin, plugin_info: PluginInfo) -> None:
-        """
-        Activate a specific plugin with no check.
-        """
-        if plugin.is_activated:
-            raise Exception("Internal Error, invalid activated state.")
-
-        name = plugin.name
-        try:
-            config = self.get_plugin_configuration(name)
-            if plugin.get_configuration_template() is not None and config is not None:
-                log.debug("Checking configuration for %s...", name)
-                plugin.check_configuration(config)
-                log.debug("Configuration for %s checked OK.", name)
-            plugin.configure(config)  # even if it is None we pass it on
-        except Exception as ex:
-            log.exception(
-                "Something is wrong with the configuration of the plugin %s", name
-            )
-            plugin.config = None
-            raise PluginConfigurationException(str(ex))
-
-        try:
-            add_plugin_templates_path(plugin_info)
-            populate_doc(plugin, plugin_info)
-            plugin.activate()
-            route(plugin)
-            plugin.callback_connect()
+                plugin.callback_connect()
         except Exception:
+    }
             log.error("Plugin %s failed at activation stage, deactivating it...", name)
             self.deactivate_plugin(name)
             raise

@@ -122,7 +122,7 @@ def check_dependencies(req_path: Path) -> Tuple[Optional[str], Sequence[str]]:
     except Exception:
         log.exception("Problem checking for dependencies.")
         return (
-            "You need to have setuptools installed for the dependency check of the plugins",
+            "You need to have setuptools installed for the dependency check of the plugins. Please install setuptools.",
             [],
         )
 

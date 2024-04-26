@@ -10,7 +10,6 @@ from threading import Thread
 from typing import BinaryIO, List, Optional
 
 import pytest
-
 from errbot.backends.base import (
     ONLINE,
     Identifier,
@@ -590,6 +589,7 @@ class FullStackTest(unittest.TestCase, TestBot):
     against a fully functioning bot.
 
     For example, if you wanted to test the builtin `!about` command,
+    For example, if you wanted to test the builtin `!about` command,
     you could write a test file with the following::
 
         from errbot.backends.test import FullStackTest
@@ -598,7 +598,6 @@ class FullStackTest(unittest.TestCase, TestBot):
             def test_about(self):
                 self.push_message('!about')
                 self.assertIn('Err version', self.pop_message())
-    """
 
     def setUp(
         self,
