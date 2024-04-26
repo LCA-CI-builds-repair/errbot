@@ -116,27 +116,21 @@ def check_python_plug_section(plugin_info: PluginInfo) -> bool:
     sys_version = sys.version_info[:3]
     if version < (3, 0, 0):
         log.error(
-            "Plugin %s is made for python 2 only and Errbot is not compatible with Python 2 anymore.",
+            "Plugin %s is made for Python 2 only, which is not supported. Please contact the plugin developer for updates.",
             plugin_info.name,
-        )
-        log.error(
-            "Please contact the plugin developer or try to contribute to port the plugin."
         )
         return False
 
-    if version >= sys_version:
+    if version > sys_version:
         log.error(
-            "Plugin %s requires python >= %s and this Errbot instance runs %s.",
+            "Plugin %s requires Python version %s or higher, but this Errbot instance runs on %s. Upgrade your Python interpreter.",
             plugin_info.name,
             ".".join(str(v) for v in version),
             ".".join(str(v) for v in sys_version),
         )
-        log.error("Upgrade your python interpreter if you want to use this plugin.")
         return False
 
     return True
-
-
 def check_errbot_version(plugin_info: PluginInfo):
     """Checks if a plugin version between min_version and max_version is ok
     for this errbot.
@@ -213,17 +207,18 @@ class BotPluginManager(StoreMixin):
             self[CONFIGS] = {}
 
     def get_plugin_obj_by_name(self, name: str) -> BotPlugin:
+        self.plugin_places = []
+        self.open_storage(storage_plugin, "core")
+        if CONFIGS not in self:
+            self[CONFIGS] = {}
+
+    def get_plugin_obj_by_name(self, name: str) -> BotPlugin:
         return self.plugins.get(name, None)
 
     def reload_plugin_by_name(self, name: str) -> None:
         """
         Completely reload the given plugin, including reloading of the module's code
-        :throws PluginActivationException: needs to be taken care of by the callers.
-        """
-        plugin = self.plugins[name]
-        plugin_info = self.plugin_infos[name]
-
-        if plugin.is_activated:
+    }
             self.deactivate_plugin(name)
 
         base_name = ".".join(plugin.__module__.split(".")[:-1])
@@ -465,6 +460,11 @@ class BotPluginManager(StoreMixin):
         Calculate plugin activation order, based on their dependencies.
 
         :return: list of plugin names, in the best order to start them.
+    def get_plugins_activation_order(self) -> List[str]:
+        """
+        Calculate plugin activation order, based on their dependencies.
+
+        :return: list of plugin names, in the best order to start them.
         """
         plugins_graph = {
             name: set(info.dependencies) for name, info in self.plugin_infos.items()
@@ -477,13 +477,9 @@ class BotPluginManager(StoreMixin):
                 # the rest of the code expects to have all plugins returned
                 return list(plugins_sorter.static_order()) + list(plugins_in_cycle)
             except CycleError:
-                # Remove cycle from the graph, and
+                # Remove cycle from the graph, and handle the circular dependency
                 cycle = set(plugins_sorter.find_cycle())
-                plugins_in_cycle.update(cycle)
-                for plugin_name in cycle:
-                    plugins_graph.pop(plugin_name)
-
-    def _activate_plugin(self, plugin: BotPlugin, plugin_info: PluginInfo) -> None:
+    }
         """
         Activate a specific plugin with no check.
         """

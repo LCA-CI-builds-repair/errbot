@@ -46,7 +46,6 @@ def debug(sig, frame) -> None:
     message += "".join(traceback.format_stack(frame))
     i.interact(message)
 
-
 ON_WINDOWS = system() == "Windows"
 
 if not ON_WINDOWS:
@@ -54,11 +53,14 @@ if not ON_WINDOWS:
     import signal
     import traceback
 
+    def debug(signum, frame):
+        message = "Signal received : entering python shell.\nTraceback:\n"
+        message += "".join(traceback.format_stack(frame))
+        i.interact(message)
+
     from daemonize import Daemonize
 
     signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
-
-
 def get_config(config_path: str):
     config_fullpath = config_path
     if not path.exists(config_fullpath):
@@ -141,8 +143,8 @@ def main() -> None:
         "given directory (otherwise it will be the working directory). "
         "This will create a data subdirectory for the bot data dir and a plugins directory"
         " for your plugin development with an example in it to get you started.",
-    )
-    # storage manipulation
+    mode_selection = parser.add_subparsers(dest="storage_mode")
+
     mode_selection.add_argument(
         "--storage-set",
         nargs=1,
@@ -156,6 +158,8 @@ def main() -> None:
         help="DANGER: Merge in the python dictionary expression "
         "passed on stdin into the given storage namespace.",
     )
+    mode_selection.add_argument(
+        "--storage-get",
     mode_selection.add_argument(
         "--storage-get",
         nargs=1,
@@ -270,16 +274,16 @@ def main() -> None:
             sys.exit(0)
 
     config_path = args["config"]
-    # setup the environment to be able to import the config.py
-    if config_path:
-        # appends the current config in order to find config.py
-        sys.path.insert(0, path.dirname(path.abspath(config_path)))
-    else:
-        config_path = execution_dir + sep + "config.py"
+    execution_dir = os.getcwd()
+    config_path = execution_dir + sep + "config.py"
 
     config = get_config(config_path)  # will exit if load fails
 
     # Extra backend is expected to be a list type, convert string to list.
+    extra_backend = getattr(config, "BOT_EXTRA_BACKEND_DIR", [])
+    if isinstance(extra_backend, str):
+        extra_backend = [extra_backend]
+    ep = entry_point_plugins(group="errbot.backend_plugins")
     extra_backend = getattr(config, "BOT_EXTRA_BACKEND_DIR", [])
     if isinstance(extra_backend, str):
         extra_backend = [extra_backend]

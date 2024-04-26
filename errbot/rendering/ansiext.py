@@ -246,6 +246,7 @@ class Table(object):
             output.write("┌" + "┬".join("─" * m for m in maxes) + "┐")
             output.write("\n")
         first = True
+        maxes = []
         for row in self.rows:
             max_row_height = 1
             for i, item in enumerate(row):
@@ -253,6 +254,7 @@ class Table(object):
                 row_height = str(text).count(NEXT_ROW) + 1
                 if row_height > max_row_height:
                     max_row_height = row_height
+            maxes.append(max_row_height)
             if not first:
                 output.write("├" + "┼".join("─" * m for m in maxes) + "┤")
                 output.write("\n")
@@ -501,8 +503,7 @@ class AnsiPostprocessor(Postprocessor):
     """Markdown generates html entities, this reputs them back to their unicode equivalent"""
 
     def run(self, text):
-        return unescape(text)
-
+from markdown.preprocessors import FencedBlockPreprocessor
 
 # This is an adapted FencedBlockPreprocessor that doesn't insert <code><pre>
 class AnsiPreprocessor(FencedBlockPreprocessor):
@@ -515,6 +516,8 @@ class AnsiPreprocessor(FencedBlockPreprocessor):
                 code = self._escape(m.group("code"))
 
                 placeholder = self.md.htmlStash.store(code)
+                text = f"{text[:m.start()]}\n{placeholder}\n{text[m.end():]}"
+            else:
                 text = f"{text[:m.start()]}\n{placeholder}\n{text[m.end():]}"
             else:
                 break

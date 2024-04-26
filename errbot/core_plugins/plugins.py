@@ -239,6 +239,7 @@ class Plugins(BotPlugin):
                 f"{name} isn't a valid plugin name. "
                 f"The current plugins are:\n{self.formatted_plugin_list(active_only=False)}"
             )
+            )
             return
 
         if name not in self._bot.plugin_manager.get_all_active_plugin_names():
