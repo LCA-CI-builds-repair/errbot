@@ -116,7 +116,7 @@ def check_python_plug_section(plugin_info: PluginInfo) -> bool:
     sys_version = sys.version_info[:3]
     if version < (3, 0, 0):
         log.error(
-            "Plugin %s is made for python 2 only and Errbot is not compatible with Python 2 anymore.",
+            "Plugin %s is made for Python 2 only, and Errbot is not compatible with Python 2 anymore.",
             plugin_info.name,
         )
         log.error(

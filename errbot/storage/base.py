@@ -14,7 +14,7 @@ class StorageBase:
         The caller of set will protect against set on non open.
 
         :param key: string as key
-        :param value: pickalable python object
+        :param value: picklable python object
         """
         pass
 

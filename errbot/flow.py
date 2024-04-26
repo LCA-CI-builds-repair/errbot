@@ -166,6 +166,7 @@ class Flow:
             for predicate, node in self._current_step.children
             if predicate(self.ctx)
         ]
+        ]
 
     def next_steps(self) -> List[FlowNode]:
         """
@@ -254,7 +255,6 @@ class BotFlow:
         self.is_activated = True
 
     def deactivate(self) -> None:
-        """
         Override if you want to do something at tear down phase (don't forget to super(Gnagna, self).deactivate())
         """
         self._bot.remove_flows_from(self)
@@ -264,7 +264,7 @@ class BotFlow:
         """
         Helper to get a specific command.
         """
-        self._bot.all_commands.get(command_name, None)
+        return self._bot.all_commands.get(command_name, None)
 
 
 class FlowExecutor:

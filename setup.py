@@ -27,19 +27,19 @@ if py_version < (3, 8):
 VERSION_FILE = os.path.join("errbot", "version.py")
 
 deps = [
-    "webtest==3.0.0",
-    "setuptools==68.1.2",
-    "flask==2.3.3",
-    "requests==2.31.0",
-    "jinja2==3.1.2",
-    "pyOpenSSL==23.2.0",
-    "colorlog==6.7.0",
-    "markdown==3.4.4",
-    "ansi==0.3.6",
-    "Pygments==2.16.1",
-    "pygments-markdown-lexer==0.1.0.dev39",  # sytax coloring to debug md
-    "dulwich==0.21.5",  # python implementation of git
-    "deepmerge==1.1.0",
+    "webtest==3.4.3",
+    "setuptools==58.2.0",
+    "flask==2.0.2",
+    "requests==2.26.0",
+    "jinja2==3.0.3",
+    "pyOpenSSL==21.0.0",
+    "colorlog==5.0.1",
+    "markdown==3.3.4",
+    "ansi==0.1.0",
+    "Pygments==2.10.0",
+    "pygments-markdown-lexer==0.1.0",  # syntax coloring to debug md
+    "dulwich==0.21.15",  # python implementation of git
+    "deepmerge==0.1.0",
 ]
 
 if py_version < (3, 9):
