@@ -125,13 +125,25 @@ def check_python_plug_section(plugin_info: PluginInfo) -> bool:
         return False
 
     if version >= sys_version:
+import log
+import sys_version
+
+def check_python_version(plugin_info, version):
+    """
+    Check if the plugin can run on the current python version.
+    :param plugin_info: Information about the plugin.
+    :param version: Required python version.
+    :return: True if the python version is compatible, False otherwise.
+    """
+    
+    if sys_version < version:
         log.error(
-            "Plugin %s requires python >= %s and this Errbot instance runs %s.",
+            "Plugin %s requires Python version %s or higher, but the current version is %s.",
             plugin_info.name,
             ".".join(str(v) for v in version),
             ".".join(str(v) for v in sys_version),
         )
-        log.error("Upgrade your python interpreter if you want to use this plugin.")
+        log.error("Please upgrade your Python interpreter to use this plugin.")
         return False
 
     return True
@@ -475,13 +487,17 @@ class BotPluginManager(StoreMixin):
             try:
                 # Return plugins which are part of a circular dependency at the end,
                 # the rest of the code expects to have all plugins returned
-                return list(plugins_sorter.static_order()) + list(plugins_in_cycle)
-            except CycleError:
-                # Remove cycle from the graph, and
-                cycle = set(plugins_sorter.find_cycle())
-                plugins_in_cycle.update(cycle)
-                for plugin_name in cycle:
-                    plugins_graph.pop(plugin_name)
+if plugin.is_activated:
+    raise Exception("Internal Error: Plugin is already activated.")
+
+name = plugin.name
+try:
+    config = self.get_plugin_configuration(name)
+    if plugin.get_configuration_template() is not None and config is not None:
+        # Add logic here for further processing if configuration template and config are both available
+except Exception as e:
+    # Handle any exceptions that occur during plugin configuration retrieval
+    raise Exception(f"Error retrieving configuration for plugin {name}: {str(e)}")
 
     def _activate_plugin(self, plugin: BotPlugin, plugin_info: PluginInfo) -> None:
         """
