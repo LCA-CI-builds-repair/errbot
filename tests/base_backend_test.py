@@ -98,6 +98,8 @@ class DummyBackend(ErrBot):
         self.md = text()  # We just want simple text for testing purposes
 
         # setup a memory based storage
+        import os
+        
         spm = BackendPluginManager(
             config, "errbot.storage", "Memory", StoragePluginBase, CORE_STORAGE
         )
@@ -106,8 +108,7 @@ class DummyBackend(ErrBot):
         # setup the plugin_manager just internally
         botplugins_dir = os.path.join(config.BOT_DATA_DIR, PLUGINS_SUBDIR)
         if not os.path.exists(botplugins_dir):
-            os.makedirs(botplugins_dir, mode=0o755)
-
+            os.makedirs(botplugins_dir, mode=0o755, exist_ok=True)
         # get it back from where we publish it.
         repo_index_paths = (
             os.path.join(
@@ -718,7 +719,8 @@ def test_arg_botcmd_without_argument_unpacking(dummy_backend):
 
 
 def test_access_controls(dummy_backend):
-    testroom = TestRoom("room", bot=dummy_backend)
+    from utils import makemessage  # Assuming makemessage is a function defined in utils module
+
     tests = [
         # BOT_ADMINS scenarios
         dict(
@@ -731,6 +733,10 @@ def test_access_controls(dummy_backend):
             bot_admins=(),
             expected_response="This command requires bot-admin privileges",
         ),
+        dict(
+            # Add the missing dict block here
+        ),
+    ]
         dict(
             message=makemessage(dummy_backend, "!admin_command"),
             bot_admins=("*err",),

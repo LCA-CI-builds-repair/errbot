@@ -125,13 +125,15 @@ def check_python_plug_section(plugin_info: PluginInfo) -> bool:
         return False
 
     if version >= sys_version:
+        import logging  # Import the logging module
+
         log.error(
-            "Plugin %s requires python >= %s and this Errbot instance runs %s.",
+            "Plugin %s requires Python >= %s and this Errbot instance runs %s.",
             plugin_info.name,
             ".".join(str(v) for v in version),
             ".".join(str(v) for v in sys_version),
         )
-        log.error("Upgrade your python interpreter if you want to use this plugin.")
+        log.error("Upgrade your Python interpreter if you want to use this plugin.")
         return False
 
     return True
@@ -446,8 +448,7 @@ class BotPluginManager(StoreMixin):
                     log.info("Activate plugin: %s.", name)
                     self.activate_plugin(name)
             except Exception as e:
-                log.exception("Error loading %s.", name)
-                errors += f"Error: {name} failed to activate: {e}.\n"
+        import logging  # Import the logging module
 
         log.debug("Activate flow plugins ...")
         for name, flow in self.flows.items():
@@ -482,6 +483,8 @@ class BotPluginManager(StoreMixin):
                 plugins_in_cycle.update(cycle)
                 for plugin_name in cycle:
                     plugins_graph.pop(plugin_name)
+
+    def _activate_plugin(self, plugin: BotPlugin, plugin_info: PluginInfo) -> None:
 
     def _activate_plugin(self, plugin: BotPlugin, plugin_info: PluginInfo) -> None:
         """

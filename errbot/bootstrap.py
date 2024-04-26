@@ -232,7 +232,8 @@ def restore_bot_from_backup(backup_filename: str, *, bot, log: logging.Logger):
     :param log: logger to use during the restoration process
     """
     with open(backup_filename) as f:
-        exec(f.read(), {"log": log, "bot": bot})
+        code = f.read()
+        exec(code, {"log": log, "bot": bot})
     bot.close_storage()
 
 

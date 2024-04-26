@@ -5,6 +5,9 @@ import socket
 from time import sleep
 
 import pytest
+import os
+import json
+import logging
 import requests
 
 from errbot.backends.test import FullStackTest, testbot

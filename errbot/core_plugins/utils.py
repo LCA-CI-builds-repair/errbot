@@ -1,19 +1,27 @@
 from os import path
-
 from errbot import BotPlugin, botcmd
 
 
 def tail(f, window=20):
+    """
+    Return the last 'window' lines of a file.
+    
+    :param f: File object to read from.
+    :param window: Number of lines to read from the end of the file.
+    :return: String containing the last 'window' lines of the file.
+    """
     return "".join(f.readlines()[-window:])
 
 
 class Utils(BotPlugin):
+    """
+    Utility functions for the bot plugin.
+    """
     # noinspection PyUnusedLocal
     @botcmd
     def echo(self, _, args):
         """A simple echo command. Useful for encoding tests etc ..."""
         return args
-
     @botcmd
     def whoami(self, msg, args):
         """A simple command echoing the details of your identifier. Useful to debug identity problems."""

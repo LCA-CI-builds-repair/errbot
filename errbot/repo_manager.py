@@ -120,6 +120,8 @@ def check_dependencies(req_path: Path) -> Tuple[Optional[str], Sequence[str]]:
             )
         return None, missing_pkg
     except Exception:
+        import logging  # Import the logging module
+
         log.exception("Problem checking for dependencies.")
         return (
             "You need to have setuptools installed for the dependency check of the plugins",

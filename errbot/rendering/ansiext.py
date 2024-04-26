@@ -250,6 +250,7 @@ class Table(object):
             max_row_height = 1
             for i, item in enumerate(row):
                 text, _ = item
+                NEXT_ROW = "\n"  # Define or import NEXT_ROW if not already defined
                 row_height = str(text).count(NEXT_ROW) + 1
                 if row_height > max_row_height:
                     max_row_height = row_height

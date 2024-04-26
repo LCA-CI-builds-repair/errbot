@@ -44,7 +44,7 @@ def debug(sig, frame) -> None:
     i = code.InteractiveConsole(d)
     message = "Signal received : entering python shell.\nTraceback:\n"
     message += "".join(traceback.format_stack(frame))
-    i.interact(message)
+    code.interact(message)
 
 
 ON_WINDOWS = system() == "Windows"
@@ -55,6 +55,11 @@ if not ON_WINDOWS:
     import traceback
 
     from daemonize import Daemonize
+
+    def debug(signum, frame):
+        message = "Signal received : entering python shell.\nTraceback:\n"
+        message += "".join(traceback.format_stack(frame))
+        code.interact(message)
 
     signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
 

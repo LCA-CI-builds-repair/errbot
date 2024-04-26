@@ -79,19 +79,20 @@ class FlowNode:
 
 class FlowRoot(FlowNode):
     """
-    This represent the entry point of a flow description.
+    This represents the entry point of a flow description.
     """
 
-    def __init__(self, name: str, description: str):
+    def __init__(self, name: str, description: str, hints: str):
         """
 
         :param name: The name of the conversation/flow.
-        :param description:  A human description of what this flow does.
+        :param description: A human description of what this flow does.
         :param hints: Hints for the next steps when triggered.
         """
         super().__init__()
         self.name = name
         self.description = description
+        self.hints = hints
         self.auto_triggers = set()
         self.room_flow = False
 
@@ -101,12 +102,15 @@ class FlowRoot(FlowNode):
         predicate: Predicate = lambda _: False,
         auto_trigger: bool = False,
         room_flow: bool = False,
+        hints: str = "",
     ) -> "FlowNode":
         """
-        :see: FlowNode except fot auto_trigger
+        :see: FlowNode except for auto_trigger
         :param predicate: :see: FlowNode
         :param node_or_command: :see: FlowNode
         :param auto_trigger: Flag this root as autotriggering: it will start a flow if this command is executed
+        :param hints: Additional hints for the next steps when triggered.
+        """
                               in the chat.
         :param room_flow: Bind the flow to the room instead of a single person
         """

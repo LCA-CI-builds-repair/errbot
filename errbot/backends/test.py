@@ -600,6 +600,9 @@ class FullStackTest(unittest.TestCase, TestBot):
                 self.assertIn('Err version', self.pop_message())
     """
 
+    import os
+    import logging
+
     def setUp(
         self,
         extra_plugin_dir=None,
@@ -618,7 +621,7 @@ class FullStackTest(unittest.TestCase, TestBot):
         :param extra_config: Piece of extra bot config in a dict.
         """
         if extra_plugin_dir is None and extra_test_file is not None:
-            extra_plugin_dir = sep.join(abspath(extra_test_file).split(sep)[:-2])
+            extra_plugin_dir = os.path.sep.join(os.path.abspath(extra_test_file).split(os.path.sep)[:-2])
 
         self.setup(
             extra_plugin_dir=extra_plugin_dir,
@@ -674,9 +677,9 @@ def testbot(request) -> TestBot:
     """
 
     def on_finish() -> TestBot:
-        bot.stop()
+    import logging
+    import sys
 
-    #  setup the logging to something digestable.
     logger = logging.getLogger("")
     logging.getLogger("MARKDOWN").setLevel(
         logging.ERROR
@@ -684,9 +687,12 @@ def testbot(request) -> TestBot:
     logger.setLevel(logging.DEBUG)
     console_hdlr = logging.StreamHandler(sys.stdout)
     console_hdlr.setFormatter(
-        logging.Formatter("%(levelname)-8s %(name)-25s %(message)s")
+        logging.Formatter("%(asctime)s - %(levelname)-8s - %(name)-25s - %(message)s")
     )
     logger.handlers = []
+    logger.addHandler(console_hdlr)
+
+    kwargs = {}
     logger.addHandler(console_hdlr)
 
     kwargs = {}
