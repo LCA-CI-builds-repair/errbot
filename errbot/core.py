@@ -40,10 +40,11 @@ class ErrBot(Backend, StoreMixin):
     """ErrBot is the layer taking care of commands management and dispatching."""
 
     __errdoc__ = """ Commands related to the bot administration """
-    MSG_ERROR_OCCURRED = "Computer says nooo. See logs for details"
-    MSG_UNKNOWN_COMMAND = 'Unknown command: "%(command)s". '
-    startup_time = datetime.now()
+import datetime
 
+MSG_ERROR_OCCURRED = "Computer says nooo. See logs for details"
+MSG_UNKNOWN_COMMAND = 'Unknown command: "%(command)s". '
+startup_time = datetime.datetime.now()
     def __init__(self, bot_config):
         log.debug("ErrBot init.")
         super().__init__(bot_config)

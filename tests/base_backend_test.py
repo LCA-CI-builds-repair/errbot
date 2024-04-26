@@ -731,7 +731,8 @@ def test_access_controls(dummy_backend):
             bot_admins=(),
             expected_response="This command requires bot-admin privileges",
         ),
-        dict(
+        # Add more scenarios here if needed
+    ]
             message=makemessage(dummy_backend, "!admin_command"),
             bot_admins=("*err",),
             expected_response="Admin command",

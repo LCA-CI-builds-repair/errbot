@@ -74,6 +74,8 @@ class FlowNode:
         return None
 
     def __str__(self):
+from typing import Union
+
         return self.command
 
 
@@ -188,8 +190,6 @@ class Flow:
                 raise ValueError(f"There is no such children: {next_step}.")
 
             if not predicate(self.ctx):
-                raise InvalidState(
-                    "It is not possible to advance to this step because its predicate is false."
                 )
 
         self._current_step = next_step
@@ -200,6 +200,13 @@ class Flow:
         Helper property to get the name of the flow.
         """
         return self._root.name
+
+    @property
+    def description(self) -> str:
+        """
+        Helper property to get the description of the flow.
+        """
+        return self._root.description
 
     @property
     def current_step(self) -> FlowNode:

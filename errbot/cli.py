@@ -252,19 +252,23 @@ def main() -> None:
             sys.exit(1)
 
     # This must come BEFORE the config is loaded below, to avoid printing
-    # logs as a side effect of config loading.
-    if args["new_plugin"]:
-        directory = (
-            os.getcwd() if args["new_plugin"] == "current_dir" else args["new_plugin"]
-        )
-        for handler in logging.getLogger().handlers:
-            root_logger.removeHandler(handler)
-        try:
-            new_plugin_wizard(directory)
-        except KeyboardInterrupt:
-            sys.exit(1)
-        except Exception as e:
-            sys.stderr.write(str(e) + "\n")
+import os
+import logging
+import sys
+
+# logs as a side effect of config loading.
+if args["new_plugin"]:
+    directory = (
+        os.getcwd() if args["new_plugin"] == "current_dir" else args["new_plugin"]
+    )
+    for handler in logging.getLogger().handlers:
+        logging.getLogger().removeHandler(handler)
+    try:
+        new_plugin_wizard(directory)
+    except KeyboardInterrupt:
+        sys.exit(1)
+    except Exception as e:
+        sys.stderr.write(str(e) + "\n")
             sys.exit(1)
         finally:
             sys.exit(0)

@@ -168,20 +168,23 @@ def check_repo(repo):
                 doc = ""
 
             if "Python" in parser:
-                python = parser["Python"]["Version"]
-                log.debug("Python Version: %s", python)
-            else:
-                python = "2"
+import log
 
-            plugin = {
-                "path": plug["path"],
-                "repo": repo["html_url"],
-                "documentation": doc,
-                "name": name,
-                "python": python,
-                "avatar_url": avatar_url,
-                "score": score,
-            }
+python = parser["Python"]["Version"]
+log.debug("Python Version: %s", python)
+
+else:
+    python = "2"
+
+plugin = {
+    "path": plug["path"],
+    "repo": repo["html_url"],
+    "documentation": doc,
+    "name": name,
+    "python": python,
+    "avatar_url": avatar_url,
+    "score": score,
+}
 
             repo_entry = plugins.get(repo_name, {})
             repo_entry[name] = plugin

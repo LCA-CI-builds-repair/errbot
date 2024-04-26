@@ -273,16 +273,16 @@ def test_activate_reload_and_deactivate(testbot):
     assert "Plugin ChatRoom reloaded." == testbot.pop_message()
 
     testbot.push_message("!plugin blacklist ChatRoom")
+    # Asserts that the message indicates the plugin "ChatRoom" is now blacklisted.
     assert "Plugin ChatRoom is now blacklisted." == testbot.pop_message()
 
+    # Simulates pushing a message "!status plugins" and asserts the expected output containing the blacklisted plugin.
     testbot.push_message("!status plugins")
     assert "B,D    │ ChatRoom" in testbot.pop_message()
 
-    # Needed else configuration for this plugin gets saved which screws up
-    # other tests
+    # Needed to unblacklist the plugin "ChatRoom" to avoid interference with other tests.
     testbot.push_message("!plugin unblacklist ChatRoom")
     testbot.pop_message()
-
 
 def test_unblacklist_and_blacklist(testbot):
     testbot.push_message("!plugin unblacklist nosuchplugin")
