@@ -258,16 +258,22 @@ class TestRoomAcl(TestRoom):
 
 class TestBackend(ErrBot):
     def change_presence(self, status: str = ONLINE, message: str = "") -> None:
+        """
+        Change the presence status of the bot.
+        """
         pass
 
     def __init__(self, config):
+        """
+        Initialize the test backend with the provided configuration.
+        """
         config.BOT_LOG_LEVEL = logging.DEBUG
         config.CHATROOM_PRESENCE = (
             "testroom",
-        )  # we are testing with simple identfiers
+        )  # we are testing with simple identifiers
         config.BOT_IDENTITY = {
             "username": "err"
-        }  # we are testing with simple identfiers
+        }  # we are testing with simple identifiers
         self.bot_identifier = self.build_identifier("Err")  # whatever
 
         super().__init__(config)
@@ -577,12 +583,8 @@ class TestBot:
         plugin = self.bot.plugin_manager.get_plugin_obj_by_name(plugin_name)
 
         if plugin is None:
-            raise Exception(f'"{plugin_name}" is not loaded.')
-        for field, mock_obj in mock_dict.items():
-            if not hasattr(plugin, field):
-                raise ValueError(f'No property/attribute named "{field}" attached.')
-            setattr(plugin, field, mock_obj)
-
+import unittest
+from errbot.backends.test import TestBot
 
 class FullStackTest(unittest.TestCase, TestBot):
     """
@@ -591,14 +593,12 @@ class FullStackTest(unittest.TestCase, TestBot):
 
     For example, if you wanted to test the builtin `!about` command,
     you could write a test file with the following::
-
-        from errbot.backends.test import FullStackTest
-
-        class TestCommands(FullStackTest):
-            def test_about(self):
-                self.push_message('!about')
-                self.assertIn('Err version', self.pop_message())
     """
+    Test class for use with Python's unittest module to write tests
+    against a fully functioning bot.
+
+    For example, if you wanted to test the builtin `!about` command,
+import logging
 
     def setUp(
         self,
@@ -646,6 +646,14 @@ def testbot(request) -> TestBot:
     It's possible to provide additional configuration to this fixture,
     by setting variables at module level or as class attributes (the
     latter taking precedence over the former). For example::
+
+        extra_plugin_dir = '/foo/bar'
+
+        def test_about(testbot):
+            testbot.push_message('!about')
+            assert "Err version" in testbot.pop_message()
+
+    ..or::
 
         extra_plugin_dir = '/foo/bar'
 

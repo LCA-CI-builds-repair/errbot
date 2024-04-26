@@ -1,13 +1,18 @@
 from os import path
-
 from errbot import BotPlugin, botcmd
 
 
 def tail(f, window=20):
+    """
+    Returns the last 'window' lines of the file 'f'.
+    """
     return "".join(f.readlines()[-window:])
 
 
 class Utils(BotPlugin):
+    """
+    Utility class for common bot functions.
+    """
     # noinspection PyUnusedLocal
     @botcmd
     def echo(self, _, args):
