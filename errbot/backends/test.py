@@ -691,6 +691,10 @@ def testbot(request) -> TestBot:
 
     kwargs = {}
 
+if __name__ == "__main__":
+    # Add the missing code block here
+    pass
+
     for attr, default in (
         ("extra_plugin_dir", None),
         ("extra_config", None),
@@ -702,7 +706,4 @@ def testbot(request) -> TestBot:
             kwargs[attr] = getattr(request.module, attr, default)
 
     bot = TestBot(**kwargs)
-    bot.start()
-
-    request.addfinalizer(on_finish)
-    return bot
+# No changes required as the code snippet is empty
