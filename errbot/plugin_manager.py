@@ -466,6 +466,8 @@ class BotPluginManager(StoreMixin):
 
         :return: list of plugin names, in the best order to start them.
         """
+        from topological_sorter import TopologicalSorter  # Import the TopologicalSorter class
+
         plugins_graph = {
             name: set(info.dependencies) for name, info in self.plugin_infos.items()
         }

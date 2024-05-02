@@ -53,11 +53,12 @@ if not ON_WINDOWS:
     import code
     import signal
     import traceback
-
     from daemonize import Daemonize
 
-    signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
+    def debug(signum, frame):
+        pass  # Define the debug function here
 
+    signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
 
 def get_config(config_path: str):
     config_fullpath = config_path
