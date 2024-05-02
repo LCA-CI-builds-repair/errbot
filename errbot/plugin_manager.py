@@ -476,6 +476,10 @@ class BotPluginManager(StoreMixin):
                 # Return plugins which are part of a circular dependency at the end,
                 # the rest of the code expects to have all plugins returned
                 return list(plugins_sorter.static_order()) + list(plugins_in_cycle)
+            except CircularDependency as e:
+                plugins_in_cycle.update(e.cycle)
+                for plugin in e.cycle:
+                    plugins_graph.pop(plugin)
             except CycleError:
                 # Remove cycle from the graph, and
                 cycle = set(plugins_sorter.find_cycle())
