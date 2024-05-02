@@ -126,14 +126,13 @@ def check_python_plug_section(plugin_info: PluginInfo) -> bool:
 
     if version >= sys_version:
         log.error(
-            "Plugin %s requires python >= %s and this Errbot instance runs %s.",
+            "Plugin %s requires Python version >= %s, but this Errbot instance is running %s.",
             plugin_info.name,
             ".".join(str(v) for v in version),
             ".".join(str(v) for v in sys_version),
         )
-        log.error("Upgrade your python interpreter if you want to use this plugin.")
+        log.info("Please upgrade your Python interpreter to meet the plugin requirements.")
         return False
-
     return True
 
 

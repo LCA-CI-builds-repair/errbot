@@ -577,13 +577,11 @@ class TestBot:
         plugin = self.bot.plugin_manager.get_plugin_obj_by_name(plugin_name)
 
         if plugin is None:
-            raise Exception(f'"{plugin_name}" is not loaded.')
+            raise RuntimeError(f'"{plugin_name}" is not loaded.')
         for field, mock_obj in mock_dict.items():
             if not hasattr(plugin, field):
-                raise ValueError(f'No property/attribute named "{field}" attached.')
+                raise AttributeError(f'No property/attribute named "{field}" found.')
             setattr(plugin, field, mock_obj)
-
-
 class FullStackTest(unittest.TestCase, TestBot):
     """
     Test class for use with Python's unittest module to write tests
