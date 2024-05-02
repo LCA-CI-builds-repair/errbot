@@ -41,11 +41,13 @@ def debug(sig, frame) -> None:
     d.update(frame.f_globals)  # Unless shadowed by global
     d.update(frame.f_locals)
 
+def debug(signum, frame):
+    d = dict(globals())
+    d.update(locals())
     i = code.InteractiveConsole(d)
     message = "Signal received : entering python shell.\nTraceback:\n"
     message += "".join(traceback.format_stack(frame))
     i.interact(message)
-
 
 ON_WINDOWS = system() == "Windows"
 
@@ -57,7 +59,6 @@ if not ON_WINDOWS:
     from daemonize import Daemonize
 
     signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
-
 
 def get_config(config_path: str):
     config_fullpath = config_path

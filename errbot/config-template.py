@@ -379,14 +379,12 @@ REVERSE_CHATROOM_RELAY = {}
 # Message rate limiting for the IRC backend. This will delay subsequent
 # messages by this many seconds (floats are supported). Setting these
 # to a value of 0 effectively disables rate limiting.
-# IRC_CHANNEL_RATE = 1  # Regular channel messages
-# IRC_PRIVATE_RATE = 1  # Private messages
-# IRC_RECONNECT_ON_KICK = 5  # Reconnect back to a channel after a kick (in seconds)
+IRC_CHANNEL_RATE = 0  # Regular channel messages
+IRC_PRIVATE_RATE = 0  # Private messages
+IRC_RECONNECT_ON_KICK = 5  # Reconnect back to a channel after a kick (in seconds)
 # Put it at None if you don't want the chat to
 # reconnect
-# IRC_RECONNECT_ON_DISCONNECT = 5  # Reconnect back to a channel after a disconnection (in seconds)
-
-# The pattern to build a user representation from for ACL matches.
+IRC_RECONNECT_ON_DISCONNECT = 0  # Reconnect back to a channel after a disconnection (in seconds)
 # The default is "{nick}!{user}@{host}" which results in "zoni!zoni@ams1.groenen.me"
 # for the user zoni connecting from ams1.groenen.me.
 # Available substitution variables:
