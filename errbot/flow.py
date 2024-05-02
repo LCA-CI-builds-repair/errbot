@@ -191,6 +191,7 @@ class Flow:
                 raise InvalidState(
                     "It is not possible to advance to this step because its predicate is false."
                 )
+            }
 
         self._current_step = next_step
 

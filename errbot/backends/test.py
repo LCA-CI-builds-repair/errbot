@@ -668,15 +668,12 @@ def testbot(request) -> TestBot:
     ..to load additional plugins from the directory `/foo/bar` or
     `/foo/baz` respectively. This works for the following items, which are
     passed to the constructor of :class:`~errbot.backends.test.TestBot`:
-
-    * `extra_plugin_dir`
-    * `loglevel`
     """
 
     def on_finish() -> TestBot:
         bot.stop()
 
-    #  setup the logging to something digestable.
+    # setup the logging to something digestible.
     logger = logging.getLogger("")
     logging.getLogger("MARKDOWN").setLevel(
         logging.ERROR

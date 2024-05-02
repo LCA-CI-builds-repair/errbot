@@ -447,6 +447,7 @@ class BotPluginManager(StoreMixin):
                     self.activate_plugin(name)
             except Exception as e:
                 log.exception("Error loading %s.", name)
+                log.error("Exception details: %s", e)
                 errors += f"Error: {name} failed to activate: {e}.\n"
 
         log.debug("Activate flow plugins ...")

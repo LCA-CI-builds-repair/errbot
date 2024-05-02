@@ -306,7 +306,7 @@ class BotPluginBase(StoreMixin):
         )
         self.current_timers.append(t)  # save the timer to be able to kill it
         t.name = f"Poller thread for {type(method.__self__).__name__}"
-        t.daemon = True  # so it is not locking on exit
+        t.daemon = True  # so it is not blocking on exit
         t.start()
 
     def poller(
