@@ -17,13 +17,13 @@
 import os
 import sys
 
+import sys
 from setuptools import find_packages, setup
 
 py_version = sys.version_info[:2]
 
 if py_version < (3, 8):
     raise RuntimeError("Errbot requires Python 3.8 or later")
-
 VERSION_FILE = os.path.join("errbot", "version.py")
 
 deps = [

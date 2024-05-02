@@ -103,7 +103,7 @@ class FlowRoot(FlowNode):
         room_flow: bool = False,
     ) -> "FlowNode":
         """
-        :see: FlowNode except fot auto_trigger
+        :see: FlowNode except for auto_trigger
         :param predicate: :see: FlowNode
         :param node_or_command: :see: FlowNode
         :param auto_trigger: Flag this root as autotriggering: it will start a flow if this command is executed
