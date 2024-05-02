@@ -152,12 +152,12 @@ class Webserver(BotPlugin):
     @botcmd(split_args_with=" ", template="webserver")
     def webhook_test(self, _, args):
         """
-            Test your webhooks from within err.
+        Test your webhooks from within err.
 
         The syntax is :
         !webhook test [relative_url] [post content]
 
-        It triggers the notification and generate also a little test report.
+        It triggers the notification and generates a little test report.
         """
         url = args[0]
         content = " ".join(args[1:])

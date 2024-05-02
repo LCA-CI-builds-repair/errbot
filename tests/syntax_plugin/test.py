@@ -17,6 +17,7 @@ class Test(BotPlugin):
     @re_botcmd(pattern=r".*")
     def re_foo(self, msg, match):
         pass
+        pass
 
     @arg_botcmd("value", type=str)
     @arg_botcmd("--repeat-count", dest="repeat", type=int, default=2)
