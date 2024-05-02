@@ -41,23 +41,21 @@ def debug(sig, frame) -> None:
     d.update(frame.f_globals)  # Unless shadowed by global
     d.update(frame.f_locals)
 
-    i = code.InteractiveConsole(d)
+import code
+import signal
+import traceback
+from daemonize import Daemonize
+
+def debug(signum, frame):
+    i = code.InteractiveConsole(frame.f_globals)
     message = "Signal received : entering python shell.\nTraceback:\n"
     message += "".join(traceback.format_stack(frame))
     i.interact(message)
 
-
 ON_WINDOWS = system() == "Windows"
 
 if not ON_WINDOWS:
-    import code
-    import signal
-    import traceback
-
-    from daemonize import Daemonize
-
     signal.signal(signal.SIGUSR1, debug)  # Register handler for debugging
-
 
 def get_config(config_path: str):
     config_fullpath = config_path

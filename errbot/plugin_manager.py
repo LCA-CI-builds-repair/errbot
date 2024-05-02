@@ -477,6 +477,8 @@ class BotPluginManager(StoreMixin):
                 # the rest of the code expects to have all plugins returned
                 return list(plugins_sorter.static_order()) + list(plugins_in_cycle)
             except CycleError:
+                pass
+            except CycleError:
                 # Remove cycle from the graph, and
                 cycle = set(plugins_sorter.find_cycle())
                 plugins_in_cycle.update(cycle)
