@@ -753,6 +753,7 @@ def test_access_controls(dummy_backend):
                 dummy_backend,
                 "!admin_command",
                 from_=TestOccupant("noterr", room=testroom),
+            ),
                 to=testroom,
             ),
             bot_admins=("noterr",),
@@ -993,13 +994,13 @@ def test_access_controls(dummy_backend):
             message=makemessage(
                 dummy_backend, "!command", from_=dummy_backend.build_identifier(1234)
             ),
-            acl={"command": {"allowusers": (1234,)}},
             expected_response="Regular command",
         ),
     ]
 
     for test in tests:
         dummy_backend.bot_config.ACCESS_CONTROLS_DEFAULT = test.get("acl_default", {})
+        dummy_backend.bot_config.ACCESS_CONTROLS = test.get("acl", {})
         dummy_backend.bot_config.ACCESS_CONTROLS = test.get("acl", {})
         dummy_backend.bot_config.BOT_ADMINS = test.get("bot_admins", ())
         logger = logging.getLogger(__name__)

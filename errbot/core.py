@@ -347,9 +347,9 @@ class ErrBot(Backend, StoreMixin):
                 with self._gbl:
                     if command in self.commands:
                         cmd = command
-                        args = " ".join(text_split[i:])
                     else:
                         i -= 1
+                    args = " ".join(text_split[i:])
                 if i <= 0:
                     break
 

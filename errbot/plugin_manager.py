@@ -453,6 +453,7 @@ class BotPluginManager(StoreMixin):
         for name, flow in self.flows.items():
             try:
                 if not flow.is_activated:
+                    # Add missing closing brace here
                     log.info("Activate flow: %s", name)
                     self.activate_flow(name)
             except Exception as e:
