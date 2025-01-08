@@ -113,12 +113,11 @@ def test_plugin_cycle(testbot):
 
     for plugin in plugins:
         testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
+            f"!repos install {plugin}", f"Installing {plugin}..."
         ),
         assert (
-            "A new plugin repository has been installed correctly from errbotio/err-helloworld"
-            in testbot.pop_message(timeout=60)
+            "A new plugin repository has been installed correctly "
+            "from errbotio/err-helloworld" in testbot.pop_message(timeout=60)
         )
         assert "Plugins reloaded" in testbot.pop_message()
 
@@ -164,13 +163,14 @@ def test_broken_plugin(testbot):
         with tarfile.open(tgz, "w:gz") as tar:
             tar.add(borken_plugin_dir, arcname="borken")
         assert "Installing" in testbot.exec_command(
-            "!repos install file://" + tgz, timeout=120
+            "!repos install file://" + tgz,
+            timeout=120,
         )
         assert "import borken  # fails" in testbot.pop_message()
         assert "as it did not load correctly." in testbot.pop_message()
         assert (
-            "Error: Broken failed to activate: "
-            "'NoneType' object has no attribute 'is_activated'"
+            "Error: Broken failed to activate: 'NoneType' object "
+            "has no attribute 'is_activated'"
         ) in testbot.pop_message()
         assert "Plugins reloaded." in testbot.pop_message()
     finally:
