@@ -23,14 +23,11 @@ class VersionChecker(BotPlugin):
 
     def activate(self):
         if self.mode not in (
-            "null",
-            "test",
-            "Dummy",
-            "text",
-        ):  # skip in all test confs.
+            "null", "test", "Dummy", "text"
+        ):  # Skip version checking in test configurations.
             self.activated = True
-            self.version_check()  # once at startup anyway
-            self.start_poller(3600 * 24, self.version_check)  # once every 24H
+            self.version_check()  # Perform initial version check on activation.
+            self.start_poller(3600 * 24, self.version_check)  # Once every 24 hours.
             super().activate()
         else:
             self.log.info("Skip version checking under %s mode.", self.mode)
@@ -44,15 +41,15 @@ class VersionChecker(BotPlugin):
         version = VERSION
         major_py_version = PY_VERSION.partition(".")[0]
 
-        # noinspection PyBroadException
+        # Attempt to get the latest version metadata from the server.
         try:
-            possible_versions = requests.get(HOME).json()
-            version = possible_versions.get(
-                f"python{major_py_version}", VERSION
-            )
+            possible_versions = requests.get(HOME).json()  # Retrieve version data.
+            version = possible_versions.get(f"python{major_py_version}", VERSION)
             self.log.debug("Latest Errbot version is: %s", version)
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
-            self.log.info("Could not establish connection to retrieve latest version.")
+            self.log.info(
+                "Could not establish connection to retrieve the latest version."
+            )
         return version
 
     def _async_vcheck(self):
@@ -61,8 +58,7 @@ class VersionChecker(BotPlugin):
         current_version = version2tuple(current_version_txt)
         if installed_version < current_version:
             self.log.debug(
-                "A new version %s has been found, notify the admins!",
-                current_version_txt,
+                "A new version %s has been found, notify the admins!", current_version_txt
             )
             self.warn_admins(
                 f"Version {current_version_txt} of Errbot is available. "
@@ -74,7 +70,7 @@ class VersionChecker(BotPlugin):
         if not self.activated:
             self.log.debug("Version check disabled")
             return
-        self.log.debug("Checking version in background.")
+        self.log.debug("Performing version check in the background.")
         threading.Thread(target=self._async_vcheck).start()
 
     def callback_connect(self):
