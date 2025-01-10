@@ -1,9 +1,9 @@
 # coding=utf-8
 import logging
 import os
-import re
+import re  # noqa
 import tarfile
-from os import mkdir, path
+from os import path
 from queue import Empty
 from shutil import rmtree
 from tempfile import mkdtemp
