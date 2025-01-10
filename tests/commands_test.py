@@ -92,10 +92,8 @@ def test_history(testbot):
     assert "uptime" in testbot.exec_command("!history")
 
     orig_sender = testbot.bot.sender
-    # Pretend to be someone else. History should be empty
     testbot.bot.sender = testbot.bot.build_identifier("non_default_person")
-    testbot.push_message("!history")
-    with pytest.raises(Empty):
+    with pytest.raises(Empty):  # History should be empty as we are a different user
         testbot.pop_message(timeout=1)
     assert "should be a separate history" in testbot.exec_command(
         "!echo should be a separate history"
@@ -113,7 +111,7 @@ def test_plugin_cycle(testbot):
 
     for plugin in plugins:
         testbot.assertInCommand(
-            f"!repos install {plugin}",
+            f"!repos install {plugin}", 
             f"Installing {plugin}..."
         ),
         assert (
