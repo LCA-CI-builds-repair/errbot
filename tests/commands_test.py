@@ -121,6 +121,17 @@ def test_plugin_cycle(testbot):
             in testbot.pop_message(timeout=60)
         )
         assert "Plugins reloaded" in testbot.pop_message()
+        assert "this command says hello" in testbot.exec_command("!help hello")
+        assert "Hello World !" in testbot.exec_command("!hello")
+        testbot.push_message("!plugin reload HelloWorld")
+        assert "Plugin HelloWorld reloaded." == testbot.pop_message()
+        testbot.push_message("!hello")  # should still respond
+        assert "Hello World !" == testbot.pop_message()
+        assert (
+            "A new plugin repository has been installed correctly from errbotio/err-helloworld"
+            in testbot.pop_message(timeout=60)
+        )
+        assert "Plugins reloaded" in testbot.pop_message()
 
         assert "this command says hello" in testbot.exec_command("!help hello")
         assert "Hello World !" in testbot.exec_command("!hello")
