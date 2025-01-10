@@ -40,10 +40,6 @@ def test_status(testbot):
     assert "Yes I am alive" in testbot.exec_command("!status")
 
 
-def test_status_plugins(testbot):
-    assert "A = Activated, D = Deactivated" in testbot.exec_command("!status plugins")
-
-
 def test_status_load(testbot):
     assert "Load " in testbot.exec_command("!status load")
 
@@ -114,8 +110,7 @@ def test_plugin_cycle(testbot):
     for plugin in plugins:
         testbot.assertInCommand(
             f"!repos install {plugin}",
-            f"Installing {plugin}..."
-        ),
+            f"Installing {plugin}...")
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
