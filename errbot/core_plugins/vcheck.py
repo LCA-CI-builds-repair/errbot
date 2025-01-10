@@ -23,10 +23,7 @@ class VersionChecker(BotPlugin):
 
     def activate(self):
         if self.mode not in (
-            "null",
-            "test",
-            "Dummy",
-            "text",
+            "null", "test", "Dummy", "text"
         ):  # skip in all test confs.
             self.activated = True
             self.version_check()  # once at startup anyway
@@ -48,7 +45,8 @@ class VersionChecker(BotPlugin):
         try:
             possible_versions = requests.get(HOME).json()
             version = possible_versions.get(
-                f"python{major_py_version}", VERSION
+                f"python{major_py_version}",
+                VERSION,
             )
             self.log.debug("Latest Errbot version is: %s", version)
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
