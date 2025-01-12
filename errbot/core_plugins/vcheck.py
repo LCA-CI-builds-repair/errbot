@@ -22,12 +22,13 @@ class VersionChecker(BotPlugin):
     activated = False
 
     def activate(self):
-        if self.mode not in (
+        if self.mode not in (  # skip in all test confs.
             "null",
             "test",
             "Dummy",
             "text",
-        ):  # skip in all test confs.
+        ):
+
             self.activated = True
             self.version_check()  # once at startup anyway
             self.start_poller(3600 * 24, self.version_check)  # once every 24H
