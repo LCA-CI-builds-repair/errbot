@@ -113,8 +113,8 @@ def test_plugin_cycle(testbot):
 
     for plugin in plugins:
         testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
+            "!repos install {}".format(plugin),
+            "Installing {}...".format(plugin)
         ),
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
