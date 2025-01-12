@@ -26,7 +26,6 @@ class VersionChecker(BotPlugin):
             "null",
             "test",
             "Dummy",
-            "text",
         ):  # skip in all test confs.
             self.activated = True
             self.version_check()  # once at startup anyway
@@ -39,7 +38,7 @@ class VersionChecker(BotPlugin):
         self.activated = False
         super().deactivate()
 
-    def _get_version(self):
+    def _get_version(self) -> str:
         """Get errbot version based on python version."""
         version = VERSION
         major_py_version = PY_VERSION.partition(".")[0]
@@ -55,7 +54,7 @@ class VersionChecker(BotPlugin):
             self.log.info("Could not establish connection to retrieve latest version.")
         return version
 
-    def _async_vcheck(self):
+    def _async_vcheck(self) -> None:
         current_version_txt = self._get_version()
         self.log.debug("Installed Errbot version is: %s", current_version_txt)
         current_version = version2tuple(current_version_txt)
@@ -70,7 +69,7 @@ class VersionChecker(BotPlugin):
                 f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker"
             )
 
-    def version_check(self):
+    def version_check(self) -> None:
         if not self.activated:
             self.log.debug("Version check disabled")
             return
