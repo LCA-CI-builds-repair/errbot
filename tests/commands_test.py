@@ -15,7 +15,11 @@ extra_plugin_dir = path.join(path.dirname(path.realpath(__file__)), "dummy_plugi
 
 
 def test_root_help(testbot):
-    assert "All commands" in testbot.exec_command("!help")
+    assert (
+        "A new plugin repository has been installed correctly from "
+        "https://github.com/errbotio/err-helloworld.git"
+        in testbot.pop_message(timeout=60)
+    )All commands" in testbot.exec_command("!help")
 
 
 def test_help(testbot):
@@ -114,10 +118,11 @@ def test_plugin_cycle(testbot):
     for plugin in plugins:
         testbot.assertInCommand(
             f"!repos install {plugin}",
-            f"Installing {plugin}..."
+            f"Installing {plugin}...",
         ),
         assert (
-            "A new plugin repository has been installed correctly from errbotio/err-helloworld"
+            "A new plugin repository has been installed correctly from "
+            "errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
         )
         assert "Plugins reloaded" in testbot.pop_message()
