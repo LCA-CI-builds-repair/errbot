@@ -72,7 +72,7 @@ def test_config_cycle(testbot):
 
     testbot.assertInCommand(
         "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}",
-        "Plugin configuration done.",
+        "Configuration done.",
     )
 
     assert "Current configuration" in testbot.exec_command("!plugin config Webserver")
@@ -117,7 +117,7 @@ def test_plugin_cycle(testbot):
             f"Installing {plugin}..."
         ),
         assert (
-            "A new plugin repository has been installed correctly from errbotio/err-helloworld"
+            "Plugin repository installed from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
         )
         assert "Plugins reloaded" in testbot.pop_message()
@@ -141,7 +141,7 @@ def test_plugin_cycle(testbot):
 
         testbot.push_message("!plugin unblacklist HelloWorld")
         assert "Plugin HelloWorld removed from blacklist." == testbot.pop_message()
-        testbot.push_message("!plugin activate HelloWorld")
+        testbot.push_message("!plugin activate HelloWorld") 
         assert "HelloWorld is already activated." == testbot.pop_message()
 
         testbot.push_message("!hello")  # should respond back
@@ -171,7 +171,7 @@ def test_broken_plugin(testbot):
         assert (
             "Error: Broken failed to activate: "
             "'NoneType' object has no attribute 'is_activated'"
-        ) in testbot.pop_message()
+        ) in testbot.pop_message() 
         assert "Plugins reloaded." in testbot.pop_message()
     finally:
         rmtree(tempd)
