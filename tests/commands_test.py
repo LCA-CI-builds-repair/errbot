@@ -94,7 +94,7 @@ def test_history(testbot):
     orig_sender = testbot.bot.sender
     # Pretend to be someone else. History should be empty
     testbot.bot.sender = testbot.bot.build_identifier("non_default_person")
-    testbot.push_message("!history")
+    testbot.exec_command("!history")
     with pytest.raises(Empty):
         testbot.pop_message(timeout=1)
     assert "should be a separate history" in testbot.exec_command(
