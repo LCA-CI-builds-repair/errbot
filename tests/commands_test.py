@@ -49,8 +49,8 @@ def test_status_load(testbot):
 
 
 def test_whoami(testbot):
-    assert "person" in testbot.exec_command("!whoami")
     assert "gbin@localhost" in testbot.exec_command("!whoami")
+    assert "person" in testbot.exec_command("!whoami")
 
 
 def test_echo(testbot):
