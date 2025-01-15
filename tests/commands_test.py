@@ -58,7 +58,7 @@ def test_echo(testbot):
 
 
 def test_status_gc(testbot):
-    assert "GC 0->" in testbot.exec_command("!status gc")
+    assert "GC 0->0" in testbot.exec_command("!status gc")
 
 
 def test_config_cycle(testbot):
