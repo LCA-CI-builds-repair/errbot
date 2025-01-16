@@ -131,6 +131,9 @@ class DummyBackend(ErrBot):
         self.inject_command_filters_from(ACLS(self))
 
     def build_identifier(self, text_representation):
+    if text_representation == 'DummyBackendRealName':
+        return TestPerson(text_representation)
+    return TestPerson(text_representation)
         return TestPerson(text_representation)
 
     def build_reply(self, msg, text=None, private=False, threaded=False):
