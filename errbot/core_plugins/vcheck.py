@@ -3,7 +3,7 @@ import threading
 from json import JSONDecodeError
 from urllib.error import HTTPError, URLError
 
-import requests
+import requests  # noqa: F401
 from requests.exceptions import ConnectionError
 
 from errbot import BotPlugin
