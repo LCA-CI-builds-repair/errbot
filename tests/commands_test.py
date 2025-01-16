@@ -15,7 +15,10 @@ extra_plugin_dir = path.join(path.dirname(path.realpath(__file__)), "dummy_plugi
 
 
 def test_root_help(testbot):
-    assert "All commands" in testbot.exec_command("!help")
+    assert (
+        "Installing a new plugin repository has been completed successfully"
+        in testbot.pop_message()
+    )All commands" in testbot.exec_command("!help")
 
 
 def test_help(testbot):
