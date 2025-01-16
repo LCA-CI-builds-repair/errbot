@@ -16,7 +16,6 @@ installed_version = version2tuple(VERSION)
 
 PY_VERSION = ".".join(str(e) for e in sys.version_info[:3])
 
-
 class VersionChecker(BotPlugin):
     connected = False
     activated = False
@@ -40,7 +39,7 @@ class VersionChecker(BotPlugin):
         super().deactivate()
 
     def _get_version(self):
-        """Get errbot version based on python version."""
+
         version = VERSION
         major_py_version = PY_VERSION.partition(".")[0]
 
