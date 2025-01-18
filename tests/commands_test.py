@@ -114,7 +114,7 @@ def test_plugin_cycle(testbot):
     for plugin in plugins:
         testbot.assertInCommand(
             f"!repos install {plugin}",
-            f"Installing {plugin}..."
+            f"Installing {plugin}...",
         ),
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
@@ -181,7 +181,9 @@ def test_backup(testbot):
     bot = testbot.bot  # used while restoring
     bot.push_message("!repos install https://github.com/errbotio/err-helloworld.git")
     assert "Installing" in testbot.pop_message()
-    assert "err-helloworld" in testbot.pop_message(timeout=60)
+    assert (
+        "A new plugin repository has been installed correctly" in testbot.pop_message()
+    )err-helloworld" in testbot.pop_message(timeout=60)
     assert "reload" in testbot.pop_message()
     bot.push_message("!backup")
     msg = testbot.pop_message()
