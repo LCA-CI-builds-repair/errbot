@@ -14,11 +14,11 @@ from mock import MagicMock
 extra_plugin_dir = path.join(path.dirname(path.realpath(__file__)), "dummy_plugin")
 
 
-def test_root_help(testbot):
+def test_root_help(testbot: Any) -> None:
     assert "All commands" in testbot.exec_command("!help")
 
 
-def test_help(testbot):
+def test_help(testbot: Any) -> None:
     assert "!about" in testbot.exec_command("!help Help")
     assert "That command is not defined." in testbot.exec_command("!help beurk")
 
@@ -28,40 +28,40 @@ def test_help(testbot):
     assert "runs re_foo" in testbot.exec_command("!help re foo")  # Part of Dummy
 
 
-def test_about(testbot):
+def test_about(testbot: Any) -> None:
     assert "Errbot version" in testbot.exec_command("!about")
 
 
-def test_uptime(testbot):
+def test_uptime(testbot: Any) -> None:
     assert "I've been up for" in testbot.exec_command("!uptime")
 
 
-def test_status(testbot):
+def test_status(testbot: Any) -> None:
     assert "Yes I am alive" in testbot.exec_command("!status")
 
 
-def test_status_plugins(testbot):
+def test_status_plugins(testbot: Any) -> None:
     assert "A = Activated, D = Deactivated" in testbot.exec_command("!status plugins")
 
 
-def test_status_load(testbot):
+def test_status_load(testbot: Any) -> None:
     assert "Load " in testbot.exec_command("!status load")
 
 
-def test_whoami(testbot):
+def test_whoami(testbot: Any) -> None:
     assert "person" in testbot.exec_command("!whoami")
     assert "gbin@localhost" in testbot.exec_command("!whoami")
 
 
-def test_echo(testbot):
+def test_echo(testbot: Any) -> None:
     assert "foo" in testbot.exec_command("!echo foo")
 
 
-def test_status_gc(testbot):
+def test_status_gc(testbot: Any) -> None:
     assert "GC 0->" in testbot.exec_command("!status gc")
 
 
-def test_config_cycle(testbot):
+def test_config_cycle(testbot: Any) -> None:
     testbot.push_message("!plugin config Webserver")
     m = testbot.pop_message()
     assert (
@@ -79,15 +79,15 @@ def test_config_cycle(testbot):
     assert "localhost" in testbot.exec_command("!plugin config Webserver")
 
 
-def test_apropos(testbot):
+def test_apropos(testbot: Any) -> None:
     assert "!about: Return information about" in testbot.exec_command("!apropos about")
 
 
-def test_logtail(testbot):
+def test_logtail(testbot: Any) -> None:
     assert "DEBUG" in testbot.exec_command("!log tail")
 
 
-def test_history(testbot):
+def test_history(testbot: Any) -> None:
     assert "up" in testbot.exec_command("!uptime")
     assert "uptime" in testbot.exec_command("!history")
 
@@ -106,7 +106,7 @@ def test_history(testbot):
     assert "uptime" in testbot.exec_command("!history")
 
 
-def test_plugin_cycle(testbot):
+def test_plugin_cycle(testbot: Any) -> None:
     plugins = [
         "errbotio/err-helloworld",
     ]
@@ -154,7 +154,7 @@ def test_plugin_cycle(testbot):
         assert 'Command "hello" not found' in testbot.pop_message()
 
 
-def test_broken_plugin(testbot):
+def test_broken_plugin(testbot: Any) -> None:
     borken_plugin_dir = path.join(
         path.dirname(path.realpath(__file__)), "borken_plugin"
     )
@@ -177,7 +177,7 @@ def test_broken_plugin(testbot):
         rmtree(tempd)
 
 
-def test_backup(testbot):
+def test_backup(testbot: Any) -> None:
     bot = testbot.bot  # used while restoring
     bot.push_message("!repos install https://github.com/errbotio/err-helloworld.git")
     assert "Installing" in testbot.pop_message()
