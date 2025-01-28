@@ -14,7 +14,7 @@ HOME = "https://errbot.io/versions.json"
 
 installed_version = version2tuple(VERSION)
 
-PY_VERSION = ".".join(str(e) for e in sys.version_info[:3])
+PY_VERSION = ".".join(map(str, sys.version_info[:3]))
 
 
 class VersionChecker(BotPlugin):
