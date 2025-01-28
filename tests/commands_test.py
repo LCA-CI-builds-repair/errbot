@@ -14,11 +14,11 @@ from mock import MagicMock
 extra_plugin_dir = path.join(path.dirname(path.realpath(__file__)), "dummy_plugin")
 
 
-def test_root_help(testbot):
+def test_root_help(testbot: Any) -> None:
     assert "All commands" in testbot.exec_command("!help")
 
 
-def test_help(testbot):
+def test_help(testbot: Any) -> None:
     assert "!about" in testbot.exec_command("!help Help")
     assert "That command is not defined." in testbot.exec_command("!help beurk")
 
@@ -28,7 +28,7 @@ def test_help(testbot):
     assert "runs re_foo" in testbot.exec_command("!help re foo")  # Part of Dummy
 
 
-def test_about(testbot):
+def test_about(testbot: Any) -> None:
     assert "Errbot version" in testbot.exec_command("!about")
 
 
