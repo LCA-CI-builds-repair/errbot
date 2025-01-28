@@ -156,7 +156,8 @@ def test_plugin_cycle(testbot):
 
 def test_broken_plugin(testbot):
     borken_plugin_dir = path.join(
-        path.dirname(path.realpath(__file__)), "borken_plugin"
+        path.dirname(path.realpath(__file__)),
+        "borken_plugin",
     )
     try:
         tempd = mkdtemp()
