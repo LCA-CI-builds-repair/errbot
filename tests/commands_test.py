@@ -108,9 +108,8 @@ def test_history(testbot):
 
 def test_plugin_cycle(testbot):
     plugins = [
-        "errbotio/err-helloworld",
+        'errbotio/err-helloworld',
     ]
-
     for plugin in plugins:
         testbot.assertInCommand(
             f"!repos install {plugin}",
