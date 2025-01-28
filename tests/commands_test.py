@@ -110,12 +110,8 @@ def test_plugin_cycle(testbot):
     plugins = [
         "errbotio/err-helloworld",
     ]
-
     for plugin in plugins:
-        testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
-        ),
+        testbot.assertInCommand(f"!repos install {plugin}", f"Installing {plugin}..."),
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
@@ -224,8 +220,7 @@ def test_encoding_preservation(testbot):
 
 def test_webserver_webhook_test(testbot):
     testbot.push_message(
-        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}"
-    )
+        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}")
     assert "Plugin configuration done." in testbot.pop_message()
     testbot.assertInCommand("!webhook test /echo toto", "Status code: 200")
 
