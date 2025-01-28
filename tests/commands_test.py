@@ -115,9 +115,7 @@ def test_plugin_cycle(testbot):
         testbot.assertInCommand(
             f"!repos install {plugin}",
             f"Installing {plugin}..."
-        ),
-        assert (
-            "A new plugin repository has been installed correctly from errbotio/err-helloworld"
+        ), assert ("A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
         )
         assert "Plugins reloaded" in testbot.pop_message()
@@ -224,9 +222,8 @@ def test_encoding_preservation(testbot):
 
 def test_webserver_webhook_test(testbot):
     testbot.push_message(
-        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}"
-    )
-    assert "Plugin configuration done." in testbot.pop_message()
+        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}")
+    assert "Plugin configuration done." in testbot.pop_message() 
     testbot.assertInCommand("!webhook test /echo toto", "Status code: 200")
 
 
@@ -405,7 +402,4 @@ def test_multiline_command(testbot):
 
 def test_plugin_info_command(testbot):
     output = testbot.exec_command("!plugin info Help")
-    assert "name: Help" in output
-    assert "module: help" in output
-    assert "help.py" in output
-    assert "log level: NOTSET" in output
+    assert all(x in output for x in ("name: Help", "module: help", "help.py", "log level: NOTSET"))
