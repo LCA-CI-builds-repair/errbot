@@ -33,14 +33,14 @@ class VersionChecker(BotPlugin):
             self.start_poller(3600 * 24, self.version_check)  # once every 24H
             super().activate()
         else:
-            self.log.info("Skip version checking under %s mode.", self.mode)
+            self.log.info(f"Skip version checking under {self.mode} mode.")
 
-    def deactivate(self):
+    def deactivate(self) -> None:
         self.activated = False
         super().deactivate()
 
-    def _get_version(self):
-        """Get errbot version based on python version."""
+    def _get_version(self) -> str:
+        """Get errbot version based on Python version."""
         version = VERSION
         major_py_version = PY_VERSION.partition(".")[0]
 
@@ -50,19 +50,18 @@ class VersionChecker(BotPlugin):
             version = possible_versions.get(
                 f"python{major_py_version}", VERSION
             )
-            self.log.debug("Latest Errbot version is: %s", version)
+            self.log.debug(f"Latest Errbot version is: {version}")
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
             self.log.info("Could not establish connection to retrieve latest version.")
         return version
 
-    def _async_vcheck(self):
+    def _async_vcheck(self) -> None:
         current_version_txt = self._get_version()
         self.log.debug("Installed Errbot version is: %s", current_version_txt)
         current_version = version2tuple(current_version_txt)
         if installed_version < current_version:
             self.log.debug(
-                "A new version %s has been found, notify the admins!",
-                current_version_txt,
+                f"A new version {current_version_txt} has been found, notify the admins!"
             )
             self.warn_admins(
                 f"Version {current_version_txt} of Errbot is available. "
@@ -70,13 +69,13 @@ class VersionChecker(BotPlugin):
                 f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker"
             )
 
-    def version_check(self):
+    def version_check(self) -> None:
         if not self.activated:
             self.log.debug("Version check disabled")
             return
         self.log.debug("Checking version in background.")
         threading.Thread(target=self._async_vcheck).start()
 
-    def callback_connect(self):
+    def callback_connect(self) -> None:
         if not self.connected:
             self.connected = True
