@@ -1,4 +1,5 @@
 import sys
+import sys
 import threading
 from json import JSONDecodeError
 from urllib.error import HTTPError, URLError
@@ -12,14 +13,13 @@ from errbot.version import VERSION
 
 HOME = "https://errbot.io/versions.json"
 
-installed_version = version2tuple(VERSION)
-
 PY_VERSION = ".".join(str(e) for e in sys.version_info[:3])
+installed_version = version2tuple(VERSION)
 
 
 class VersionChecker(BotPlugin):
     connected = False
-    activated = False
+    activated = True
 
     def activate(self):
         if self.mode not in (
@@ -28,7 +28,7 @@ class VersionChecker(BotPlugin):
             "Dummy",
             "text",
         ):  # skip in all test confs.
-            self.activated = True
+            self.activated = True  # Ensure the plugin is activated
             self.version_check()  # once at startup anyway
             self.start_poller(3600 * 24, self.version_check)  # once every 24H
             super().activate()
@@ -37,7 +37,7 @@ class VersionChecker(BotPlugin):
 
     def deactivate(self):
         self.activated = False
-        super().deactivate()
+        return super().deactivate()
 
     def _get_version(self):
         """Get errbot version based on python version."""
@@ -55,6 +55,7 @@ class VersionChecker(BotPlugin):
             self.log.info("Could not establish connection to retrieve latest version.")
         return version
 
+    # Use _async_vcheck as a helper function
     def _async_vcheck(self):
         current_version_txt = self._get_version()
         self.log.debug("Installed Errbot version is: %s", current_version_txt)
@@ -64,15 +65,14 @@ class VersionChecker(BotPlugin):
                 "A new version %s has been found, notify the admins!",
                 current_version_txt,
             )
-            self.warn_admins(
-                f"Version {current_version_txt} of Errbot is available. "
-                f"http://pypi.python.org/pypi/errbot/{current_version_txt}. "
-                f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker"
-            )
+            self.warn_admins(f"Version {current_version_txt} of Errbot is available. "
+                            f"http://pypi.python.org/pypi/errbot/{current_version_txt}. "
+                            f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker")
 
+    # Use version_check as the main entry point
     def version_check(self):
         if not self.activated:
-            self.log.debug("Version check disabled")
+            self.log.debug("Version check is disabled")
             return
         self.log.debug("Checking version in background.")
         threading.Thread(target=self._async_vcheck).start()
