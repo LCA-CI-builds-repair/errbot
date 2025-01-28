@@ -361,7 +361,7 @@ def test_callback_no_command(testbot):
 
 
 def test_subcommands(testbot):
-    # test single subcommand (method is run_subcommands())
+    # Test single subcommand (method is run_subcommands).
     cmd = "!run subcommands with these args"
     cmd_underscore = "!run_subcommands with these args"
     expected_args = "with these args"
