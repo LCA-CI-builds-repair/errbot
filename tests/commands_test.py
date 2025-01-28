@@ -264,7 +264,7 @@ def test_activate_reload_and_deactivate(testbot):
     assert "A      │ ChatRoom" in testbot.pop_message()
 
     testbot.push_message("!plugin activate ChatRoom")
-    assert "ChatRoom is already activated." == testbot.pop_message()
+     assert "ChatRoom is already activated." == testbot.pop_message()
 
     testbot.push_message("!plugin deactivate ChatRoom")
     assert "Plugin ChatRoom deactivated." == testbot.pop_message()
