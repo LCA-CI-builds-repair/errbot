@@ -19,6 +19,7 @@ PY_VERSION = ".".join(str(e) for e in sys.version_info[:3])
 
 class VersionChecker(BotPlugin):
     connected = False
+    version_check_retries = 0
     activated = False
 
     def activate(self):
@@ -56,14 +57,24 @@ class VersionChecker(BotPlugin):
         return version
 
     def _async_vcheck(self):
-        current_version_txt = self._get_version()
-        self.log.debug("Installed Errbot version is: %s", current_version_txt)
-        current_version = version2tuple(current_version_txt)
-        if installed_version < current_version:
-            self.log.debug(
-                "A new version %s has been found, notify the admins!",
-                current_version_txt,
-            )
+        try:
+            current_version_txt = self._get_version()
+            self.log.debug("Installed Errbot version is: %s", current_version_txt)
+            current_version = version2tuple(current_version_txt)
+            if installed_version < current_version:
+                self.log.debug(
+                    "A new version %s has been found, notify the admins!",
+                    current_version_txt,
+                )
+                self.warn_admins(
+                    f"Version {current_version_txt} of Errbot is available. "
+                    f"http://pypi.python.org/pypi/errbot/{current_version_txt}. "
+                    f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker"
+                )
+        except Exception as e:
+            self.version_check_retries += 1
+            self.log.error(f"Version check failed. Retries: {self.version_check_retries}/{MAX_RETRIES}")
+            self.log.exception(e)
             self.warn_admins(
                 f"Version {current_version_txt} of Errbot is available. "
                 f"http://pypi.python.org/pypi/errbot/{current_version_txt}. "
@@ -71,6 +82,10 @@ class VersionChecker(BotPlugin):
             )
 
     def version_check(self):
+        MAX_RETRIES = 3
+        if self.version_check_retries >= MAX_RETRIES:
+            self.log.error("Maximum version check retries reached. Disabling version checker.")
+            return
         if not self.activated:
             self.log.debug("Version check disabled")
             return
