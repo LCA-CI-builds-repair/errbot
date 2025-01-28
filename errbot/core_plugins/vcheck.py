@@ -32,7 +32,7 @@ class VersionChecker(BotPlugin):
             self.version_check()  # once at startup anyway
             self.start_poller(3600 * 24, self.version_check)  # once every 24H
             super().activate()
-        else:
+        else:  
             self.log.info("Skip version checking under %s mode.", self.mode)
 
     def deactivate(self):
@@ -47,9 +47,7 @@ class VersionChecker(BotPlugin):
         # noinspection PyBroadException
         try:
             possible_versions = requests.get(HOME).json()
-            version = possible_versions.get(
-                f"python{major_py_version}", VERSION
-            )
+            version = possible_versions.get(f"python{major_py_version}", VERSION)
             self.log.debug("Latest Errbot version is: %s", version)
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
             self.log.info("Could not establish connection to retrieve latest version.")
@@ -59,9 +57,7 @@ class VersionChecker(BotPlugin):
         current_version_txt = self._get_version()
         self.log.debug("Installed Errbot version is: %s", current_version_txt)
         current_version = version2tuple(current_version_txt)
-        if installed_version < current_version:
-            self.log.debug(
-                "A new version %s has been found, notify the admins!",
+        if installed_version < current_version:            self.log.debug("A new version %s has been found, notify the admins!",
                 current_version_txt,
             )
             self.warn_admins(
