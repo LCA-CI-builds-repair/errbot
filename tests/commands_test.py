@@ -353,7 +353,7 @@ def test_callback_no_command(testbot):
     cmd = "!this_is_not_a_real_command_at_all"
     expected_str = f"Command fell through: {cmd}"
 
-    testbot.exec_command("!plugin deactivate CommandNotFoundFilter")
+    testbot.exec_command("!plugin deactivate TestCommandNotFoundFilter")
     testbot.bot.plugin_manager._extra_plugin_dir = extra_plugin_dir
     testbot.bot.plugin_manager.update_plugin_places([])
     testbot.exec_command("!plugin activate TestCommandNotFoundFilter")
