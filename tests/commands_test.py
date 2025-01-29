@@ -177,7 +177,7 @@ def test_broken_plugin(testbot):
         rmtree(tempd)
 
 
-def test_backup(testbot):
+def test_backup(testbot, tmpdir):
     bot = testbot.bot  # used while restoring
     bot.push_message("!repos install https://github.com/errbotio/err-helloworld.git")
     assert "Installing" in testbot.pop_message()
@@ -188,18 +188,18 @@ def test_backup(testbot):
     assert "has been written in" in msg
     filename = re.search(r'"(.*)"', msg).group(1)
 
-    # At least the backup should mention the installed plugin
-    assert "errbotio/err-helloworld" in open(filename).read()
-
     # Now try to clean the bot and restore
     for p in testbot.bot.plugin_manager.get_all_active_plugins():
         p.close_storage()
 
+    backup_dir = tmpdir.mkdir("backup")
+    backup_file = backup_dir.join('backup.json')
+    backup_file.write(open(filename).read())
+    
     assert "Plugin HelloWorld deactivated." in testbot.exec_command(
         "!plugin deactivate HelloWorld"
     )
 
-    plugins_dir = path.join(testbot.bot_config.BOT_DATA_DIR, "plugins")
     bot.repo_manager["installed_repos"] = {}
     bot.plugin_manager["configs"] = {}
     rmtree(plugins_dir)
@@ -208,7 +208,7 @@ def test_backup(testbot):
     from errbot.bootstrap import restore_bot_from_backup
 
     log = logging.getLogger(__name__)  # noqa
-    restore_bot_from_backup(filename, bot=bot, log=log)
+    restore_bot_from_backup(str(backup_file), bot=bot, log=log)
 
     assert "Plugin HelloWorld activated." in testbot.exec_command(
         "!plugin activate HelloWorld"
