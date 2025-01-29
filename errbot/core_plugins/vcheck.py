@@ -23,8 +23,7 @@ class VersionChecker(BotPlugin):
 
     def activate(self):
         if self.mode not in (
-            "null",
-            "test",
+            "null", "test", 
             "Dummy",
             "text",
         ):  # skip in all test confs.
@@ -58,8 +57,7 @@ class VersionChecker(BotPlugin):
     def _async_vcheck(self):
         current_version_txt = self._get_version()
         self.log.debug("Installed Errbot version is: %s", current_version_txt)
-        current_version = version2tuple(current_version_txt)
-        if installed_version < current_version:
+        if installed_version < version2tuple(current_version_txt):
             self.log.debug(
                 "A new version %s has been found, notify the admins!",
                 current_version_txt,
