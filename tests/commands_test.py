@@ -110,12 +110,8 @@ def test_plugin_cycle(testbot):
     plugins = [
         "errbotio/err-helloworld",
     ]
-
     for plugin in plugins:
-        testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
-        ),
+        testbot.assertInCommand(f"!repos install {plugin}", f"Installing {plugin}..."),
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
@@ -155,9 +151,7 @@ def test_plugin_cycle(testbot):
 
 
 def test_broken_plugin(testbot):
-    borken_plugin_dir = path.join(
-        path.dirname(path.realpath(__file__)), "borken_plugin"
-    )
+    borken_plugin_dir = path.join(path.dirname(path.realpath(__file__)), "borken_plugin")
     try:
         tempd = mkdtemp()
         tgz = os.path.join(tempd, "borken.tar.gz")
@@ -224,8 +218,7 @@ def test_encoding_preservation(testbot):
 
 def test_webserver_webhook_test(testbot):
     testbot.push_message(
-        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}"
-    )
+        "!plugin config Webserver {'HOST': 'localhost', 'PORT': 3141, 'SSL':  None}")
     assert "Plugin configuration done." in testbot.pop_message()
     testbot.assertInCommand("!webhook test /echo toto", "Status code: 200")
 
@@ -385,7 +378,7 @@ def test_command_not_found_with_space_in_bot_prefix(testbot):
 
 def test_mock_injection(testbot):
     helper_mock = MagicMock()
-    helper_mock.return_value = "foo"
+    helper_mock.return_value = "foo" 
     mock_dict = {"helper_method": helper_mock}
     testbot.inject_mocks("Dummy", mock_dict)
     assert "foo" in testbot.exec_command("!baz")
