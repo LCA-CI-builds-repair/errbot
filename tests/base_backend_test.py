@@ -330,10 +330,7 @@ def test_commands_can_return_string(dummy_execute_and_send):
 def test_commands_can_return_md(dummy_execute_and_send):
     dummy, m = dummy_execute_and_send
     dummy._execute_and_send(
-        cmd="return_args_as_md",
-        args=["foo", "bar"],
-        match=None,
-        msg=m,
+        cmd="return_args_as_md", args=["foo", "bar"], match=None, msg=m,
         template_name=dummy.return_args_as_md._err_command_template,
     )
     response = dummy.pop_message()
