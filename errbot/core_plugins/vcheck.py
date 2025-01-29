@@ -22,12 +22,7 @@ class VersionChecker(BotPlugin):
     activated = False
 
     def activate(self):
-        if self.mode not in (
-            "null",
-            "test",
-            "Dummy",
-            "text",
-        ):  # skip in all test confs.
+        if self.mode not in ("null", "test", "Dummy", "text"):  # skip in all test confs.
             self.activated = True
             self.version_check()  # once at startup anyway
             self.start_poller(3600 * 24, self.version_check)  # once every 24H
@@ -56,8 +51,7 @@ class VersionChecker(BotPlugin):
         return version
 
     def _async_vcheck(self):
-        current_version_txt = self._get_version()
-        self.log.debug("Installed Errbot version is: %s", current_version_txt)
+        current_version_txt = self._get_version() self.log.debug("Installed Errbot version is: %s", current_version_txt)
         current_version = version2tuple(current_version_txt)
         if installed_version < current_version:
             self.log.debug(
