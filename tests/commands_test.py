@@ -112,10 +112,8 @@ def test_plugin_cycle(testbot):
     ]
 
     for plugin in plugins:
-        testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
-        ),
+        testbot.assertInCommand(f"!repos install {plugin}", f"Installing {plugin}..."),
+
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
@@ -243,7 +241,8 @@ def test_activate_reload_and_deactivate(testbot):
         assert "ChatRoom" in m
 
     testbot.push_message("!plugin reload ChatRoom")
-    assert "Plugin ChatRoom reloaded." == testbot.pop_message()
+    message = testbot.pop_message()
+    assert message == "Plugin ChatRoom reloaded."
 
     testbot.push_message("!status plugins")
     assert "A      │ ChatRoom" in testbot.pop_message()
@@ -393,14 +392,15 @@ def test_mock_injection(testbot):
 
 def test_multiline_command(testbot):
     testbot.assertInCommand(
-        """
-        !bar title
-        first line of body
-        second line of body
-        """,
+        (
+            "!bar title\n"
+            "first line of body\n"
+            "second line of body"
+        ),
         "!bar title\nfirst line of body\nsecond line of body",
         dedent=True,
     )
+
 
 
 def test_plugin_info_command(testbot):
