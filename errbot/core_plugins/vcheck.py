@@ -10,6 +10,7 @@ from errbot import BotPlugin
 from errbot.utils import version2tuple
 from errbot.version import VERSION
 
+
 HOME = "https://errbot.io/versions.json"
 
 installed_version = version2tuple(VERSION)
@@ -67,7 +68,7 @@ class VersionChecker(BotPlugin):
             self.warn_admins(
                 f"Version {current_version_txt} of Errbot is available. "
                 f"http://pypi.python.org/pypi/errbot/{current_version_txt}. "
-                f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker"
+                f"To disable this check do: {self._bot.prefix}plugin blacklist VersionChecker",
             )
 
     def version_check(self):
@@ -80,3 +81,4 @@ class VersionChecker(BotPlugin):
     def callback_connect(self):
         if not self.connected:
             self.connected = True
+
