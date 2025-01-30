@@ -112,10 +112,7 @@ def test_plugin_cycle(testbot):
     ]
 
     for plugin in plugins:
-        testbot.assertInCommand(
-            f"!repos install {plugin}",
-            f"Installing {plugin}..."
-        ),
+        testbot.assertInCommand(f"!repos install {plugin}", f"Installing {plugin}...")
         assert (
             "A new plugin repository has been installed correctly from errbotio/err-helloworld"
             in testbot.pop_message(timeout=60)
@@ -393,7 +390,7 @@ def test_mock_injection(testbot):
 
 def test_multiline_command(testbot):
     testbot.assertInCommand(
-        """
+        """\
         !bar title
         first line of body
         second line of body
