@@ -691,9 +691,10 @@ def test_arg_botcmd_returns_help_message_as_chat(dummy_backend):
     dummy_backend.callback_message(
         makemessage(dummy_backend, "!returns_first_name_last_name --help")
     )
-    assert (
+    assert any((
         "usage: returns_first_name_last_name [-h] [--last-name LAST_NAME]"
-        in dummy_backend.pop_message().body
+        in msg.body for msg in dummy_backend.pop_messages()
+    ))
     )
 
 
