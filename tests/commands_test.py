@@ -342,7 +342,7 @@ def test_simple_match(testbot):
 def test_no_suggest_on_re_commands(testbot):
     testbot.push_message("!re_ba")
     # Don't suggest a regexp command.
-    assert "!re bar" not in testbot.pop_message()
+    assert "!re_foo" not in testbot.pop_message()
 
 
 def test_callback_no_command(testbot):
