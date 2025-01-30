@@ -26,7 +26,8 @@ class VersionChecker(BotPlugin):
             "null",
             "test",
             "Dummy",
-            "text",
+            "text"
+            ,
         ):  # skip in all test confs.
             self.activated = True
             self.version_check()  # once at startup anyway
