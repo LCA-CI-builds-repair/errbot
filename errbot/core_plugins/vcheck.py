@@ -48,7 +48,8 @@ class VersionChecker(BotPlugin):
         try:
             possible_versions = requests.get(HOME).json()
             version = possible_versions.get(
-                f"python{major_py_version}", VERSION
+                f"python{major_py_version}",
+                VERSION,
             )
             self.log.debug("Latest Errbot version is: %s", version)
         except (HTTPError, URLError, ConnectionError, JSONDecodeError):
