@@ -392,14 +392,16 @@ def test_mock_injection(testbot):
 
 
 def test_multiline_command(testbot):
-    testbot.assertInCommand(
-        """
+    testbot.assertInCommand("""
         !bar title
         first line of body
         second line of body
-        """,
-        "!bar title\nfirst line of body\nsecond line of body",
-        dedent=True,
+    """, """
+        !bar title
+        first line of body
+        second line of body
+    """,
+        dedent=True
     )
 
 
